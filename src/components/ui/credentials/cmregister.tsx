@@ -1,6 +1,8 @@
 "use client";
 
+import { usernameAction } from "@/actions/aregister/usernameaction";
 import FsForm from "@/components/shared/form/fsform";
+import { KeyboardEvent, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const CmRegister = () => {
@@ -18,7 +20,50 @@ const CmRegisterValues = () => {
 
   const [username, email] = watch(["username", "email"]);
 
-  console.log(username);
+  const [mailError, setMailError] = useState<string>();
+  const [usernameError, setUsernameError] = useState<string>();
+
+  const [mailLoading, setMailLoading] = useState(false);
+  const [usernameLoading, setUsernameLoading] = useState(false);
+
+  function noSpaces(event: KeyboardEvent<HTMLInputElement>) {
+    if (event.key === " ") {
+      event.preventDefault();
+    }
+  }
+
+  const checkingUserName = async (str: string) => {
+    setUsernameLoading(true);
+    const usernameExistOrNot = await usernameAction(str);
+    if (usernameExistOrNot?.data?.status === 200) {
+      setUsernameLoading(false);
+      setUsernameError(`Congrats, ${username} is available`);
+    } else if (str.length === 0) {
+      setUsernameError("No spaces allowed");
+    } else {
+      setUsernameError(`${username} isn't available`);
+    }
+  };
+
+  const checkingMail = async (str: string) => {
+    setMailLoading(true);
+    const usernameExistOrNot = await usernameAction(str);
+    if (usernameExistOrNot?.data?.status === 200) {
+      setUsernameLoading(false);
+      setMailError("");
+    } else {
+      setMailError(`${email} already exist`);
+    }
+  };
+
+  if (username) {
+    // checkingUserName(username);
+    console.log("something");
+  }
+  if (email) {
+    checkingMail(email);
+  }
+
   return (
     <>
       <div className="tooltip">
@@ -28,10 +73,19 @@ const CmRegisterValues = () => {
           placeholder="Username"
           required
           pattern="^\S*$"
+          onKeyDown={(event) => noSpaces(event)}
         />
-        <span className="tooltip-text">No spaces allowed</span>
+        <span className="tooltip-text">
+          {usernameError ? usernameError : "No spaces allowed"}
+        </span>
       </div>
-      <input type="email" {...register("email")} placeholder="Email" required />
+      <input
+        type="email"
+        {...register("email")}
+        onKeyDown={(event) => noSpaces(event)}
+        placeholder="Email"
+        required
+      />
       <input
         type="password"
         {...register("password")}
