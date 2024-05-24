@@ -9,12 +9,14 @@ import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { Confirm } from "notiflix/build/notiflix-confirm-aio";
 import { useRouter } from "next/navigation";
+import { MailerAction } from "@/actions/aregister/mailercodeaction";
 
 const CmRegister = () => {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const router = useRouter();
   const onSubmit = async (data: FieldValues) => {
     setSubmitLoading(true);
+    delete data.code;
     delete data.cPassword;
     const register = await RegisterAction(data as TRegisterUser);
     if (register?.statusCode === 200) {
@@ -60,6 +62,12 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
   const [usernameError, setUsernameError] = useState<string>();
 
   const [matchPassword, setMatchPassword] = useState<string>();
+  const [isValidMail, setIsValidMail] = useState<boolean>(false);
+
+  const [mail, setMail] = useState<string>();
+  const [mailSend, setMailSend] = useState<boolean>(false);
+  const [mailCode, setMailCode] = useState<number>();
+  const [mailCodeCheck, setMailCodeCheck] = useState<boolean>(true);
 
   const [error, setError] = useState<boolean>(false);
 
@@ -88,12 +96,25 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
   };
 
   const checkingMail = async (str: string) => {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (str.length === 0) {
+      return setMailError("");
+    }
+    if (!emailPattern.test(str)) {
+      setIsValidMail(false);
+      return setMailError("oops! mail isn't valid");
+    }
+
     const mailExistOrNot = await mailAction(str);
     if (mailExistOrNot?.statusCode === 200) {
       setError(false);
+      setIsValidMail(true);
       setMailError("");
+      setMail(str);
     } else if (!mailExistOrNot?.success) {
       setError(true);
+      setIsValidMail(false);
       setMailError(`oops! already exist`);
     }
   };
@@ -118,6 +139,33 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
     }
   };
 
+  const onChangeCode = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 0) {
+      return setMailCodeCheck(true);
+    }
+    if (Number(e.target.value) === mailCode) {
+      setMailCodeCheck(true);
+    } else {
+      setMailCodeCheck(false);
+    }
+  };
+
+  const sendMailCode = async () => {
+    const sendMailResponse = await MailerAction(mail as string);
+    if (sendMailResponse?.success) {
+      Confirm.show(
+        "Congratulations 🎉",
+        "Email code send successful, please check your inbox or spam folder.",
+        "{ Understood }",
+        "{ Love you ❤️ }",
+        () => {},
+        () => {}
+      );
+
+      setMailCode(sendMailResponse?.data?.code);
+    }
+  };
+
   return (
     <>
       <div className="tooltip">
@@ -135,7 +183,7 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
         </span>
       </div>
 
-      <div className="tooltip">
+      <div className={`tooltip ${mailSend && "!hidden"}`}>
         <input
           type="email"
           {...register("email")}
@@ -145,6 +193,30 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
           onChange={(e) => onChangeMail(e)}
         />
         {mailError && <span className="tooltip-text">{mailError}</span>}
+        {isValidMail && (
+          <span
+            onClick={() => {
+              setMailSend(true);
+              sendMailCode();
+            }}
+            className="absolute right-2 top-1/4 translate-y-0.5 text-slate-500 hover:text-slate-700 cursor-pointer">
+            send code
+          </span>
+        )}
+      </div>
+      <div className={`tooltip ${!mailSend && "!hidden"}`}>
+        <input
+          type="text"
+          {...register("code")}
+          placeholder="Enter Code"
+          required
+          pattern="^\S*$"
+          onKeyDown={(event) => noSpaces(event)}
+          onChange={(e) => onChangeCode(e)}
+        />
+        {!mailCodeCheck && (
+          <span className="tooltip-text">code isn&apos;t valid</span>
+        )}
       </div>
       <input
         type="password"
@@ -170,8 +242,10 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
         {matchPassword && <span className="tooltip-text">{matchPassword}</span>}
       </div>
       <button
-        disabled={loading || error}
-        className={`mb-8  ${loading || (error && "!cursor-not-allowed")}`}
+        disabled={loading || error || !password}
+        className={`mb-8  ${
+          loading || error || (!password && "!cursor-not-allowed")
+        }`}
         type="submit">
         {loading ? "Loading." : "{ Sign Up }"}
       </button>
