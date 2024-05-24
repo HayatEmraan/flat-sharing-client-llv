@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import GlobalProvider from "@/provider/global";
+import Footer from "@/components/shared/footer/footer";
+import NewsLetter from "@/components/shared/newsletter/newsletter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <GlobalProvider>{children}</GlobalProvider>
+        <GlobalProvider>
+          <div className="pb-28">{children}</div>
+          <div className="px-[2%] md:px-[6%] bg-card-dark border border-card-dark">
+            <NewsLetter />
+            <div className="mt-20">
+              <Footer />
+            </div>
+          </div>
+        </GlobalProvider>
       </body>
     </html>
   );

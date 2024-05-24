@@ -1,6 +1,9 @@
 // "use client";
 
 import { getCookie } from "@/actions/acookies/getcookie";
+import Navbar from "@/components/ui/header/navbar";
+import HomeComp from "@/components/ui/homepage/homepage";
+
 
 // import FsForm from "@/components/shared/form/fsform";
 // import FsInput from "@/components/shared/form/fsinput";
@@ -26,10 +29,12 @@ const Page = async () => {
     })
   ).json();
 
-  console.log(response);
+  // console.log(response);
   return (
     <div>
-      <h1>this is nothing</h1>
+      {/* <Navbar /> */}
+      <HomeComp />
+      {/* <h1>this is nothing</h1> */}
     </div>
   );
 };
