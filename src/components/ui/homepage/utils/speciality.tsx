@@ -2,7 +2,7 @@ import { FiCheck, FiLayers, FiUsers } from "react-icons/fi";
 
 const Speciality = () => {
   return (
-    <div className="pt-10 pb-16">
+    <div className="pt-10 pb-16" id="about-us">
       <div className="flex flex-wrap gap-10">
         <div className="flex-1 basis-[20rem]">
           <h1 className="sub-heading">about us</h1>

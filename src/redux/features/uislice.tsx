@@ -15,7 +15,7 @@ const uiSlice = createSlice({
   reducers: {
     openDropdown: (state, action) => {
       const mainLink = action.payload.link;
-      // state.currentLink = navLinks.find((link) => link.linkText === mainLink);
+      state.currentLink = navLinks.find((link) => link.linkText === mainLink);
       state.isDropdownOpen = true;
       state.position = action.payload.center;
     },

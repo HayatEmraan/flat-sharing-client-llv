@@ -3,7 +3,7 @@ import { feeds } from "@/data/dummyData";
 
 const Feeds = () => {
   return (
-    <div className="pt-10 pb-16">
+    <div className="pt-10 pb-16" id="blog">
       <div className="text-center">
         <h1 className="mx-auto sub-heading">blog post</h1>
         <h1 className="heading">latest newsfeeds</h1>

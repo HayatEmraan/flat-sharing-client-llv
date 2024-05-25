@@ -13,13 +13,11 @@ const SingleProductCard = ({
   number_of_bathrooms,
   dimensions,
   image,
-  basis,
 }) => {
   return (
     <div
-      className={`flex-1 ${
-        basis ? basis : "basis-[18rem]"
-      } shadow-light dark:border-card-dark border rounded-lg overflow-hidden relative group`}>
+      className={`flex-1 basis-[18rem]
+      shadow-light dark:border-card-dark border rounded-lg overflow-hidden relative group`}>
       <div className="group !opacity-100 overflow-hidden relative">
         <Link href="/" className="!opacity-100">
           <img

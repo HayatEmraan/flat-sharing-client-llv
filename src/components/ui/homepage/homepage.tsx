@@ -12,7 +12,7 @@ import Feeds from "./utils/feeds";
 
 const HomeComp = () => {
   return (
-    <div className="pt-16 px-[3%] md:px-[6%]">
+    <div className="pt-24 px-[3%] md:px-[6%]">
       <Hero />
       <Filters />
       <Invest />

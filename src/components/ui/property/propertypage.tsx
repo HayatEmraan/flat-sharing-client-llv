@@ -31,11 +31,7 @@ const PropertyPage = () => {
       <HeadeFilters layout={layout} setLayout={setLayout} />
       <div className="grid md:grid-cols-4 gap-x-14 mt-5">
         <div className="md:col-span-3 mt-5 md:mt-0 h-fit md:sticky top-0 ">
-          {layout === "grid" ? (
-            <PropertyList basis={[]} />
-          ) : (
-            <PropertyFullWidth />
-          )}
+          {layout === "grid" ? <PropertyList /> : <PropertyFullWidth />}
           <Pagination itemsPerPage={8} pageData={property} />
         </div>
         <div className=" md:col-span-1 row-start-3 md:row-start-auto h-fit md:sticky top-0">
