@@ -23,15 +23,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <GlobalProvider>
-          <Navbar />
-          <Dropdown></Dropdown>
-          <div className="pb-28">{children}</div>
-          <div className="px-[2%] md:px-[6%] bg-card-dark border border-card-dark">
+          {/* <Navbar />
+          <Dropdown></Dropdown> */}
+          {/* className="pb-28" */}
+          <div>{children}</div>
+          {/* <div className="px-[2%] md:px-[6%] bg-card-dark border border-card-dark">
             <NewsLetter />
             <div className="mt-20">
               <Footer />
             </div>
-          </div>
+          </div> */}
         </GlobalProvider>
       </body>
     </html>
