@@ -9,6 +9,8 @@ export default function Photos() {
   const handleUpload = (data) => {
     setPhotos([...photos, data.info.secure_url]);
   };
+
+  console.log(process.env.NEXT_PUBLIC_CLOUDINARY_PRESET);
   return (
     <div className="flex gap-5 items-center justify-center flex-col h-full">
       <h2 className="font-semibold text-4xl">Add some photos of your house</h2>
@@ -19,7 +21,7 @@ export default function Photos() {
       <CldUploadButton
         options={{ multiple: true }}
         onUpload={handleUpload}
-        uploadPreset="vflnndvq">
+        uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET}>
         <span className="bg-red-500 py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer">
           Upload
         </span>

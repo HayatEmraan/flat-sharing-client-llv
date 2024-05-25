@@ -24,9 +24,11 @@ export default function Availability() {
     <div className="flex items-center justify-center h-full flex-col gap-5">
       <div className="flex flex-col gap-3">
         <h2 className="font-semibold text-4xl">
-          Share some basics about your place
+          Share your place area (sq ft)
         </h2>
-        <p>You&apos;ll add more details later, such as bed types.</p>
+        <p className="text-center">
+          You&apos;ll add more details later, such as place space.
+        </p>
       </div>
       <ul className="flex  flex-col w-[40%] gap-5">
         {Object.keys(searchPlaceSpace).map((place) => (

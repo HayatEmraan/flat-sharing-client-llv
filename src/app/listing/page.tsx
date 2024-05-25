@@ -30,12 +30,11 @@ const Page = () => {
   const {
     locationType,
     placeType,
-    mapData,
     locationData,
     addressInfo,
     placeSpace,
     searchPlaceSpace,
-    placeAmeneites,
+    placeAmenities,
     title,
     description,
     price,
@@ -43,40 +42,18 @@ const Page = () => {
     photos,
   } = userAppStore();
 
-  const Popular = placeAmeneites?.filter(
-    (amenetiy) => amenetiy?.popular === true
-  );
-
-  const NonPopular = placeAmeneites?.filter(
-    (amenetiy) => amenetiy?.popular !== true
-  );
-
   const finalListing = {
     name: title,
     location: addressInfo?.location,
-    category: {
-      name: locationType?.name,
-      type: placeType?.title,
-    },
-    lat: addressInfo?.lat,
-    lng: addressInfo?.lng,
-    capacity: {
-      adults: searchPlaceSpace?.adults,
-      children: searchPlaceSpace?.childrens,
-      infants: searchPlaceSpace?.infants,
-    },
-    availability: {
-      bedrooms: placeSpace?.beds,
-      baths: placeSpace?.bathrooms,
-      guests: placeSpace?.guests,
-    },
+    category: locationType?.name,
+    purpose: placeType?.title,
+    numberOfBedrooms: placeSpace?.beds,
+    numberOfBathrooms: placeSpace?.bathrooms,
     images: photos,
-    description: description,
+    briefDescription: description,
     price: price,
     taxes: taxes,
-    popular_facilities: Popular,
-    facilities: NonPopular,
-    reviews: [],
+    amenities: placeAmenities,
   };
 
   const getComponent = () => {
@@ -118,30 +95,28 @@ const Page = () => {
     setStep(step - 1);
   };
   const handleListing = async () => {
-    // const result = await insertroom(finalListing);
-    // if (result?.data?.insertedId) {
-    //   setStep(step + 1);
-    // }
+    console.log(finalListing);
   };
+
   return (
     <div className="grid grid-rows-new-listing h-[100vh]">
-      <header className="flex items-center px-20 justify-between">
+      <header className="flex py-14 px-20 justify-between">
         <div className="cursor-pointer">
           <Link
             href="/"
             className={`flex-none text-2xl font-bold dark:text-white ${bodoni.className} bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent`}
             aria-label="Brand">
-            Flatvue
+            {"{ Flatvue }"}
           </Link>
         </div>
       </header>
 
-      {getComponent()}
+      <div className="h-[75vh]">{getComponent()}</div>
 
       <footer
-        className={`flex items-center ${
-          step === 13 ? "hidden" : ""
-        } px-20 pb-4 border-t-4 border-t-gray-300 ${
+        className={`flex !bg-white  items-center ${
+          step === 12 ? "hidden" : ""
+        } px-20 pb-4 border-t-4 border-t-gray-300  ${
           step > 0 ? "justify-between" : "justify-end"
         }`}>
         {step >= 1 && (
@@ -153,34 +128,32 @@ const Page = () => {
         )}
         {step !== 0 ? (
           <button
-            onClick={step === 12 ? handleListing : handleNext}
+            onClick={step === 11 ? handleListing : handleNext}
             disabled={
               step === 2 && locationType === undefined
                 ? true
                 : false || (step === 3 && placeType === undefined)
                 ? true
-                : false || (step === 4 && mapData === undefined)
+                : false || (step === 5 && placeSpace === undefined)
                 ? true
-                : false || (step === 5 && locationData === undefined)
+                : false || (step === 4 && locationData === undefined)
                 ? true
-                : false || (step === 6 && placeSpace === undefined)
+                : false || (step === 6 && searchPlaceSpace?.area === 0)
                 ? true
-                : false || (step === 7 && searchPlaceSpace?.adults === 0)
+                : false || (step === 7 && placeAmenities.length === 0)
                 ? true
-                : false || (step === 8 && placeAmeneites.length === 0)
+                : false || (step === 8 && title.length <= 10)
                 ? true
-                : false || (step === 9 && title.length <= 10)
+                : false || (step === 9 && description.length <= 50)
                 ? true
-                : false || (step === 10 && description.length <= 50)
+                : false || (step === 10 && price <= 0)
                 ? true
-                : false || (step === 11 && price <= 0)
-                ? true
-                : false || (step === 12 && photos.length <= 4)
+                : false || (step === 11 && photos.length <= 4)
                 ? true
                 : false
             }
             className="bg-[#222222] py-3 mt-5 px-5 text-base font-medium text-white rounded-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
-            {step === 12 ? "Submit" : "Next"}
+            {step === 11 ? "Submit" : "Next"}
           </button>
         ) : (
           <button

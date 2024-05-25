@@ -1,12 +1,7 @@
 import { create } from "zustand";
-import { createLisitingsSlice } from "./slices/ListingsSlice";
-import { createAuthSlice } from "./slices/AuthSlice";
 import { createProcessSlice } from "./slices/ProcessSlice";
-import { createSearchSlice } from "./slices/SearchSlice";
+import { ProcessSlice } from "./types/ztypes";
 
-export const userAppStore = create()((...a) => ({
-  ...createLisitingsSlice(...a),
-  ...createAuthSlice(...a),
+export const userAppStore = create<ProcessSlice>()((...a) => ({
   ...createProcessSlice(...a),
-  ...createSearchSlice(...a),
 }));

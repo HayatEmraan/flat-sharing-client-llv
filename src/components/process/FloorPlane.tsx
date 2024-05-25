@@ -20,7 +20,7 @@ export default function FloorPlan() {
         <h2 className="font-semibold text-4xl">
           Share some basics about your place
         </h2>
-        <p>You&apos;ll add more details later, such as bed types.</p>
+        <p className="text-center">You&apos;ll add more details later, such as bed types.</p>
       </div>
       <div className="flex  flex-col w-[40%] gap-5">
         {Object.keys(placeSpace).map((place) => (

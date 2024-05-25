@@ -3,7 +3,7 @@ import { userAppStore } from "@/utils/zustand/zstore";
 import React from "react";
 
 export default function ProcessAmeneties() {
-  const { placeAmeneites, setPlaceAmenities } = userAppStore();
+  const { placeAmenities, setPlaceAmenities } = userAppStore();
   const addAmenety = (facility) => {
     setPlaceAmenities([...placeAmeneites, facility]);
   };
@@ -21,6 +21,7 @@ export default function ProcessAmeneties() {
       setPlaceAmenities(clonedAmenties);
     }
   };
+
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-col gap-3">
@@ -43,7 +44,7 @@ export default function ProcessAmeneties() {
                     className={` flex flex-col justify-start font-semibold border border-gray-300 rounded-md p-3 hover:border-gray-950 transition-all duration-300 ${
                       placeAmeneites?.find(
                         (amentiy) => amentiy?.name === facility?.name
-                      ) && "border-gray-950"
+                      ) && "!border-gray-950 bg-gray-100"
                     }`}
                     onClick={() => {
                       placeAmeneites?.find(
