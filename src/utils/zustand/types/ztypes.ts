@@ -1,7 +1,6 @@
 // types.ts
 export interface PlaceSpace {
-  bathrooms: number;
-  beds: number;
+  [key: string]: number;
 }
 
 export interface AddressInfo {
@@ -13,7 +12,6 @@ interface locationType {
   svgPath: any;
 }
 
-
 interface placeType {
   title: string;
   subTitle: string;
@@ -23,22 +21,18 @@ interface placeType {
 type TPlaceType = placeType | undefined;
 
 interface locationData {
-  locality: string;
-  landmark: string;
-  district: string;
-  postcode: string;
-  country: string;
+  [key: string]: any;
 }
 
 type TLocationDataType = locationData | undefined;
 
-interface searchPlaceSpace {
-  area: number;
+export interface searchPlaceSpace {
+  [key: string]: number;
 }
 
-interface placeAmenities {
-  image: string
-  name: string
+export interface placeAmenities {
+  image: string;
+  name: string;
 }
 
 export interface ProcessSlice {

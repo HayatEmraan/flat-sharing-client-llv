@@ -10,9 +10,9 @@ const StepThreeStarter = () => {
             <strong>Finish up and publish</strong>
           </h1>
           <p className="text-xl">
-            Finally, you’ll choose if you'd like to start with an experienced
-            guest, then you'll set your nightly price. Answer a few quick
-            questions and publish when you're ready.
+            Finally, you’ll choose if you&apos;d like to start with an
+            experienced guest, then you&apos;ll set your nightly price. Answer a
+            few quick questions and publish when you&apos;re ready.
           </p>
         </div>
         <div className="">

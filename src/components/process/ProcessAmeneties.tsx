@@ -1,24 +1,25 @@
 import { AmenetiesType } from "@/data/Ameneties";
+import { placeAmenities } from "@/utils/zustand/types/ztypes";
 import { userAppStore } from "@/utils/zustand/zstore";
 import React from "react";
 
 export default function ProcessAmeneties() {
   const { placeAmenities, setPlaceAmenities } = userAppStore();
-  const addAmenety = (facility) => {
-    setPlaceAmenities([...placeAmeneites, facility]);
+  const addAmenity = (facility: placeAmenities) => {
+    setPlaceAmenities([...placeAmenities, facility]);
   };
-  const removeAmenty = (facility) => {
-    const index = placeAmeneites.findIndex(
-      (amenetiy) => amenetiy?.name === facility?.name
+  const removeAmenity = (facility: placeAmenities) => {
+    const index = placeAmenities.findIndex(
+      (amenity) => amenity?.name === facility?.name
     );
     if (index) {
-      const clonedAmenties = [...placeAmeneites];
-      clonedAmenties.splice(index, 1);
-      setPlaceAmenities(clonedAmenties);
+      const clonedAmenities = [...placeAmenities];
+      clonedAmenities.splice(index, 1);
+      setPlaceAmenities(clonedAmenities);
     } else {
-      const clonedAmenties = [...placeAmeneites];
-      clonedAmenties.splice(0, 1);
-      setPlaceAmenities(clonedAmenties);
+      const clonedAmenities = [...placeAmenities];
+      clonedAmenities.splice(0, 1);
+      setPlaceAmenities(clonedAmenities);
     }
   };
 
@@ -42,16 +43,16 @@ export default function ProcessAmeneties() {
                   <button
                     key={index}
                     className={` flex flex-col justify-start font-semibold border border-gray-300 rounded-md p-3 hover:border-gray-950 transition-all duration-300 ${
-                      placeAmeneites?.find(
-                        (amentiy) => amentiy?.name === facility?.name
+                      placeAmenities?.find(
+                        (amenity) => amenity?.name === facility?.name
                       ) && "!border-gray-950 bg-gray-100"
                     }`}
                     onClick={() => {
-                      placeAmeneites?.find(
-                        (amentiy) => amentiy?.name === facility?.name
+                      placeAmenities?.find(
+                        (amenity) => amenity?.name === facility?.name
                       )
-                        ? removeAmenty(facility)
-                        : addAmenety(facility);
+                        ? removeAmenity(facility)
+                        : addAmenity(facility);
                     }}>
                     {facility?.image && (
                       <img

@@ -4,7 +4,7 @@ import FormInput from "../shared/common/FormInput";
 
 export default function PlaceDetails() {
   const { locationData, setLocationData, addressInfo } = userAppStore();
-  const handleChange = (name, value) => {
+  const handleChange = (name: string, value: string) => {
     setLocationData({ ...locationData, [name]: value });
   };
   return (

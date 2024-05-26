@@ -1,16 +1,20 @@
-
+import { PlaceSpace } from "@/utils/zustand/types/ztypes";
 import { userAppStore } from "@/utils/zustand/zstore";
 import React from "react";
 
 export default function FloorPlan() {
   const { placeSpace, setPlaceSpace } = userAppStore();
-  const handleIncrement = (type) => {
-    setPlaceSpace({ ...placeSpace, [type]: placeSpace[type] + 1 });
+  const handleIncrement = (type: string) => {
+    setPlaceSpace({
+      ...placeSpace,
+      [type]: placeSpace[type as keyof PlaceSpace] + 1,
+    });
   };
 
-  const handleDecrement = (type) => {
-    if (placeSpace[type] > 1) {
-      setPlaceSpace({ ...placeSpace, [type]: placeSpace[type] - 1 });
+  const handleDecrement = (type: string) => {
+    const typeOfPlace = placeSpace[type as keyof PlaceSpace];
+    if (typeOfPlace > 1) {
+      setPlaceSpace({ ...placeSpace, [type]: typeOfPlace - 1 });
     }
   };
 
@@ -20,7 +24,9 @@ export default function FloorPlan() {
         <h2 className="font-semibold text-4xl">
           Share some basics about your place
         </h2>
-        <p className="text-center">You&apos;ll add more details later, such as bed types.</p>
+        <p className="text-center">
+          You&apos;ll add more details later, such as bed types.
+        </p>
       </div>
       <div className="flex  flex-col w-[40%] gap-5">
         {Object.keys(placeSpace).map((place) => (

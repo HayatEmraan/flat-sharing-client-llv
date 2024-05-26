@@ -18,8 +18,11 @@ import { useDispatch } from "react-redux";
 const PropertyPage = () => {
   const { isFilterMenuOpen } = useAppSelector((state) => state.ui);
   const dispatch = useDispatch();
-  const handleCloseFiltermenu = (e) => {
-    if (e.target.classList.contains("filter-modal")) {
+  const handleCloseFilterMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (
+      e.target instanceof HTMLElement &&
+      e.target.classList.contains("filter-modal")
+    ) {
       dispatch(closeFilterMenu());
     }
   };
@@ -37,7 +40,7 @@ const PropertyPage = () => {
         <div className=" md:col-span-1 row-start-3 md:row-start-auto h-fit md:sticky top-0">
           <div
             className={`filter-modal ${isFilterMenuOpen && "open"}`}
-            onClick={handleCloseFiltermenu}>
+            onClick={handleCloseFilterMenu}>
             <div className={`filter-dialog ${isFilterMenuOpen && "open"}`}>
               <div className="flex-center-between border-b dark:border-dark md:hidden">
                 <div

@@ -6,11 +6,10 @@ import { userAppStore } from "@/utils/zustand/zstore";
 
 export default function Photos() {
   const { photos, setPhotos } = userAppStore();
-  const handleUpload = (data) => {
+  const handleUpload = (data: Record<string, any>) => {
     setPhotos([...photos, data.info.secure_url]);
   };
 
-  console.log(process.env.NEXT_PUBLIC_CLOUDINARY_PRESET);
   return (
     <div className="flex gap-5 items-center justify-center flex-col h-full">
       <h2 className="font-semibold text-4xl">Add some photos of your house</h2>

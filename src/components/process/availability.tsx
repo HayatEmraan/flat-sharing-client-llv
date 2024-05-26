@@ -1,21 +1,23 @@
+import { searchPlaceSpace } from "@/utils/zustand/types/ztypes";
 import { userAppStore } from "@/utils/zustand/zstore";
 import React from "react";
 
 export default function Availability() {
   const { searchPlaceSpace, setSearchPlaceSpace } = userAppStore();
 
-  const handleIncrement = (type) => {
+  const handleIncrement = (type: string) => {
     setSearchPlaceSpace({
       ...searchPlaceSpace,
-      [type]: searchPlaceSpace[type] + 1,
+      [type]: searchPlaceSpace[type as keyof searchPlaceSpace] + 1,
     });
   };
 
-  const handleDecrement = (type) => {
-    if (searchPlaceSpace[type] > 1) {
+  const handleDecrement = (type: string) => {
+    const typeOfSearch = searchPlaceSpace[type as keyof searchPlaceSpace];
+    if (typeOfSearch > 1) {
       setSearchPlaceSpace({
         ...searchPlaceSpace,
-        [type]: searchPlaceSpace[type] - 1,
+        [type]: typeOfSearch - 1,
       });
     }
   };

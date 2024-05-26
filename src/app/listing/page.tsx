@@ -26,7 +26,7 @@ const bodoni = Libre_Bodoni({
 });
 
 const Page = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(6);
   const {
     locationType,
     placeType,
