@@ -1,11 +1,10 @@
-import { useAppSelector } from "@/redux/hooks";
 import SingleProductCard from "../singlecard";
+import { TFlat } from "@/interface/tflat/tflat";
 
-const PropertyList = () => {
-  const { currentDataItems } = useAppSelector((state) => state.dataStore);
+const PropertyList = ({ flat }: { flat: TFlat[] }) => {
   return (
     <div className="flex flex-wrap gap-4">
-      {currentDataItems?.map((property) => (
+      {flat?.map((property) => (
         <SingleProductCard key={property.id} {...property} />
       ))}
     </div>

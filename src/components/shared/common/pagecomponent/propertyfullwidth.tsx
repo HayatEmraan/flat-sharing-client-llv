@@ -1,11 +1,10 @@
 
-import { useAppSelector } from "@/redux/hooks";
 import SingleProductCardFullWidth from "./singleproductcardfullwidth";
-const PropertyFullWidth = () => {
-  const { currentDataItems } = useAppSelector((state) => state.dataStore);
+import { TFlat } from "@/interface/tflat/tflat";
+const PropertyFullWidth = ({ flat }: { flat: TFlat[] }) => {
   return (
     <div>
-      {currentDataItems?.map((property) => (
+      {flat?.map((property) => (
         <SingleProductCardFullWidth key={property.id} {...property} />
       ))}
     </div>

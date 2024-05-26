@@ -1,3 +1,7 @@
+import Price from "@/components/process/price";
+import { listingTypes } from "@/data/ListingTypes";
+import { PriceRange } from "@/data/priceRange";
+
 const AdvancedSearch = () => {
   return (
     <div className="p-3 border dark:border-dark">
@@ -5,24 +9,21 @@ const AdvancedSearch = () => {
       <div className="mt-3">
         <select name="" id="" className="filter">
           <option value="">Categories</option>
-          <option value="condors">Condors</option>
-          <option value="offfice buildings">Offfice Buildings</option>
-          <option value="apartments">Apartments</option>
-          <option value="mansions">Mansions</option>
-          <option value="real estate">Real Estate</option>
-          <option value="penthouse">Penthouse</option>
-          <option value="living room">Living Room</option>
+          {listingTypes.map((type) => (
+            <option key={type.name} value={type.name}>
+              {type.name}
+            </option>
+          ))}
         </select>
       </div>
       <div className="mt-3">
         <select name="" id="" className="filter">
           <option value="">Price Range</option>
-          <option value="$40,000 - $80,000">$40,000 - $80,000</option>
-          <option value="$80,000 - $120,000">$80,000 - $120,000</option>
-          <option value="$120,000 - $200,000">$120,000 - $200,000</option>
-          <option value="$200,000 - $300,000">$200,000 - $300,000</option>
-          <option value="$300,000 - $500,000">$300,000 - $500,000</option>
-          <option value="$500,000 - $1000,000">$500,000 - $1000,000</option>
+          {PriceRange.map((type) => (
+            <option key={type.name} value={type.name}>
+              {type.name}
+            </option>
+          ))}
         </select>
       </div>
       <div className="mt-3">

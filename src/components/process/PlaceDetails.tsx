@@ -20,7 +20,7 @@ export default function PlaceDetails() {
         <div className="flex flex-col gap-2 w-[30%]">
           <FormInput
             isListing
-            name="locality"
+            name="location"
             placeholder="Street Address"
             setValue={handleChange}
             type="text"
@@ -31,36 +31,10 @@ export default function PlaceDetails() {
           <FormInput
             isListing
             name="landmark"
-            placeholder="Nearby landmark (if applicable)"
+            placeholder="Nearby landmark (number only i.e 10, 40)"
             setValue={handleChange}
-            type="text"
+            type="number"
             value={locationData?.landmark}
-          />{" "}
-          <FormInput
-            isListing
-            name="district"
-            placeholder="City / town"
-            setValue={handleChange}
-            type="text"
-            value={addressInfo?.location?.city}
-          />
-        </div>
-        <div className="flex flex-col gap-2 w-[30%]">
-          <FormInput
-            isListing
-            name="postcode"
-            placeholder="Post code"
-            setValue={handleChange}
-            type="text"
-            value={locationData?.postcode}
-          />{" "}
-          <FormInput
-            isListing
-            name="country"
-            placeholder="Country / province"
-            setValue={handleChange}
-            type="text"
-            value={addressInfo?.location?.country}
           />
         </div>
       </div>

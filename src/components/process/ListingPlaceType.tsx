@@ -5,12 +5,12 @@ import React from "react";
 
 const data = [
   {
-    title: "For Sale",
+    title: "Sale",
     subTitle: "Guests have the whole place to themselves.",
     svg: <House />,
   },
   {
-    title: "For Rent",
+    title: "Rent",
     subTitle:
       "Guests sleep in a room or common area that may be shared with you or others.",
     svg: <SharedRoom />,
@@ -33,7 +33,7 @@ const ListingPlaceType = () => {
             }`}
             onClick={() => setPlaceType(place)}>
             <div>
-              <h4 className="font-semibold">{place.title}</h4>
+              <h4 className="font-semibold">For {place.title}</h4>
               <p>{place.subTitle}</p>
             </div>
             {place.svg}

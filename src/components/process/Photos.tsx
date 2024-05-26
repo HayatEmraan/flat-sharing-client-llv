@@ -12,6 +12,9 @@ export default function Photos() {
 
   return (
     <div className="flex gap-5 items-center justify-center flex-col h-full">
+      <h2 className="font-bold text-2xl text-red-500">
+        {"{Min. 5 photo required}"}
+      </h2>
       <h2 className="font-semibold text-4xl">Add some photos of your house</h2>
       <p>
         You&apos;ll need 5 photos to get started. You can add more or make

@@ -9,13 +9,20 @@ import HeadeFilters from "@/components/shared/common/propertyfilters/headefilter
 import PriceRange from "@/components/shared/common/propertyfilters/pricerange";
 import Type from "@/components/shared/common/propertyfilters/type";
 import { property } from "@/data/dummyData";
+import { TFlat, TResponse, TStats } from "@/interface";
 import { closeFilterMenu } from "@/redux/features/uislice";
 import { useAppSelector } from "@/redux/hooks";
 import { useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 
-const PropertyPage = () => {
+const PropertyPage = ({
+  flat,
+  stats,
+}: {
+  flat: TResponse<TFlat[]>;
+  stats: TResponse<TStats[]>;
+}) => {
   const { isFilterMenuOpen } = useAppSelector((state) => state.ui);
   const dispatch = useDispatch();
   const handleCloseFilterMenu = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -34,7 +41,11 @@ const PropertyPage = () => {
       <HeadeFilters layout={layout} setLayout={setLayout} />
       <div className="grid md:grid-cols-4 gap-x-14 mt-5">
         <div className="md:col-span-3 mt-5 md:mt-0 h-fit md:sticky top-0 ">
-          {layout === "grid" ? <PropertyList /> : <PropertyFullWidth />}
+          {layout === "grid" ? (
+            <PropertyList flat={flat?.data} />
+          ) : (
+            <PropertyFullWidth flat={flat?.data} />
+          )}
           <Pagination itemsPerPage={8} pageData={property} />
         </div>
         <div className=" md:col-span-1 row-start-3 md:row-start-auto h-fit md:sticky top-0">
@@ -51,7 +62,7 @@ const PropertyPage = () => {
                 <p className="uppercase">Filters</p>
               </div>
               <AdvancedSearch />
-              <Type />
+              <Type stats={stats.data} />
               <PriceRange />
               {/* <SocialIcons /> */}
               <CTA />

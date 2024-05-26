@@ -1,6 +1,14 @@
 import ReactStars from "react-rating-stars-component";
 import { FaQuoteRight } from "react-icons/fa";
-const TestimonialCard = ({ reviewText, name, image, role }) => {
+
+interface ITestimonial {
+  reviewText: string;
+  name: string;
+  image: string;
+  role: string;
+}
+
+const TestimonialCard = ({ reviewText, name, image, role }: ITestimonial) => {
   return (
     <div className="card flex-1 basis-[16rem] relative">
       <div className="absolute opacity-10 text-9xl top-0 left-0">

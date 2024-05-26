@@ -18,6 +18,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { Libre_Bodoni } from "next/font/google";
+import { ListingAction } from "@/actions/alisting/listingaction";
+import { TListing } from "@/interface";
+import { Report } from "notiflix";
 
 // google fonts
 const bodoni = Libre_Bodoni({
@@ -26,12 +29,12 @@ const bodoni = Libre_Bodoni({
 });
 
 const Page = () => {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(0);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const {
     locationType,
     placeType,
-    locationData,
-    addressInfo,
+    locationData = {},
     placeSpace,
     searchPlaceSpace,
     placeAmenities,
@@ -44,15 +47,17 @@ const Page = () => {
 
   const finalListing = {
     name: title,
-    location: addressInfo?.location,
+    location: locationData?.location,
     category: locationType?.name,
+    area: searchPlaceSpace?.area,
     purpose: placeType?.title,
-    numberOfBedrooms: placeSpace?.beds,
-    numberOfBathrooms: placeSpace?.bathrooms,
+    numberOfBedrooms: Number(placeSpace?.beds),
+    numberOfBathrooms: Number(placeSpace?.bathrooms),
+    landmark: Number(locationData?.landmark),
     images: photos,
     briefDescription: description,
-    price: price,
-    taxes: taxes,
+    price: Number(price),
+    taxes: Number(taxes),
     amenities: placeAmenities,
   };
 
@@ -95,7 +100,20 @@ const Page = () => {
     setStep(step - 1);
   };
   const handleListing = async () => {
-    console.log(finalListing);
+    setSubmitLoading(true);
+    const listFlat = await ListingAction(finalListing as TListing);
+    console.log(listFlat);
+    if (listFlat.success) {
+      setStep(step + 1);
+    } else {
+      setSubmitLoading(false);
+      Report.failure(
+        "{Listing} Failed",
+        '"Failure is simply the opportunity to begin again, this time more intelligently." <br/><br/>- Henry Ford',
+        "{ Try, again }",
+        () => {}
+      );
+    }
   };
 
   return (
@@ -136,7 +154,7 @@ const Page = () => {
                 ? true
                 : false || (step === 5 && placeSpace === undefined)
                 ? true
-                : false || (step === 4 && locationData === undefined)
+                : false || (step === 4 && Object.keys(locationData).length <= 1)
                 ? true
                 : false || (step === 6 && searchPlaceSpace?.area === 0)
                 ? true
@@ -153,7 +171,11 @@ const Page = () => {
                 : false
             }
             className="bg-[#222222] py-3 mt-5 px-5 text-base font-medium text-white rounded-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
-            {step === 11 ? "Submit" : "Next"}
+            {step === 11
+              ? submitLoading
+                ? "Submitting..."
+                : "Submit"
+              : "Next"}
           </button>
         ) : (
           <button
