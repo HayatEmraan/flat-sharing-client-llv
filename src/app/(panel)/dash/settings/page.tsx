@@ -1,9 +1,11 @@
+import { getMe } from "@/actions/aprofile/profileactions";
 import Setting from "@/components/ui/dash/profile/Setting";
 
-const Page = () => {
+const Page = async () => {
+  const me = await getMe()
   return (
     <div>
-      <Setting />
+      <Setting me={me} />
     </div>
   );
 };

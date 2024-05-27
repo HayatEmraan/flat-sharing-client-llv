@@ -1,14 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import React from "react";
 import PasswordInfo from "./passwordInfo";
 import GeneralInfo from "./generalInfo";
 import UploadImage from "./uploadImage";
+import { TMe } from "@/interface/tme/tme";
+import { TResponse } from "@/interface";
 
-const Setting = () => {
-  const router = useRouter();
-  const [user, setUser] = useState(null);
-
+const Setting = ({ me }: { me: TResponse<TMe> }) => {
   return (
     <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
       <div className="mb-4 col-span-full xl:mb-2">
@@ -56,10 +54,10 @@ const Setting = () => {
       </div>
       {/* Right Content */}
       <div className="col-span-full xl:col-auto">
-        <UploadImage />
+        <UploadImage photo={me?.data?.photo as string} />
         <PasswordInfo />
       </div>
-      <GeneralInfo />
+      <GeneralInfo me={me?.data} />
     </div>
   );
 };

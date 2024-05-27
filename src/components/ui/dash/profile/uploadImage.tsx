@@ -1,20 +1,58 @@
+import { ImageAction } from "@/actions/aimg/imageaction";
+import { ProfileAction } from "@/actions/aprofile/profileactions";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Confirm } from "notiflix";
+import { useState } from "react";
 
-const UploadImage = () => {
+const UploadImage = ({ photo }: { photo: string }) => {
+  const router = useRouter();
+  const [uploading, setUploading] = useState(false);
   const imageOnchange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUploading(true);
     const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_PRESET as string;
     const form = new FormData();
-    if (event.target.files && event.target.files[0]) {
-      form.append("file", event.target.files[0]);
+    if (event?.target?.files && event?.target?.files[0]) {
+      form.append("file", event?.target?.files[0]);
       form.append("upload_preset", uploadPreset);
     }
+    const image = await ImageAction(form);
+    const photoURL = image?.secure_url;
+    if (photoURL) {
+      const uploadToDb = await ProfileAction({ photo: photoURL });
+      if (uploadToDb?.success) {
+        Confirm.show(
+          "Congratulations 🎉",
+          "you profile photo has been successfully updated, please allow sometime to effect action.",
+          "{ Understood }",
+          "{ Love you ❤️ }",
+          () => {
+            router.refresh();
+          },
+          () => {
+            router.refresh();
+          }
+        );
+      }
+    } else {
+      Confirm.show(
+        "Oops, Something went wrong",
+        "Error while updating your profile photo, please try again later!",
+        "{ Back }",
+        "Stay here",
+        () => {},
+        () => {}
+      );
+    }
+
+    setUploading(false);
   };
   return (
     <div className="p-4 mb-3 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
       <div className="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
         <Image
           className="mb-4 rounded-lg sm:mb-0 xl:mb-4 2xl:mb-0"
-          src={"https://i.ibb.co/VMk1CZQ/images.jpg"}
+          src={`${photo ? photo : "https://i.ibb.co/VMk1CZQ/images.jpg"}`}
           alt="Profile picture"
           width={112}
           height={112}
@@ -45,7 +83,7 @@ const UploadImage = () => {
                     <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
                     <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
                   </svg>
-                  Upload Photo
+                  {uploading ? "Uploading..." : "Upload Photo"}
                 </span>
               </label>
             </div>

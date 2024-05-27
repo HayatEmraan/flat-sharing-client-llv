@@ -6,6 +6,7 @@ export const ImageAction = async (form: FormData) => {
   return await (
     await fetch(fetchURL, {
       method: "POST",
+      cache: "no-store",
       body: form,
     })
   ).json();
