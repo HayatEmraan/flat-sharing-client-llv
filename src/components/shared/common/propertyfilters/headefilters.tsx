@@ -1,3 +1,4 @@
+import { IMeta } from "@/interface";
 import { openFilterMenu } from "@/redux/features/uislice";
 import React from "react";
 import { FaList } from "react-icons/fa";
@@ -7,9 +8,11 @@ import { useDispatch } from "react-redux";
 const HeadeFilters = ({
   layout,
   setLayout,
+  meta,
 }: {
   layout: string;
   setLayout: React.Dispatch<React.SetStateAction<string>>;
+  meta: IMeta;
 }) => {
   const dispatch = useDispatch();
   return (
@@ -36,13 +39,15 @@ const HeadeFilters = ({
             <FiFilter />
           </div>
         </div>
-        <p>Showing 01 - 08 of 28 results</p>
+        <p>
+          Showing {meta?.limit} of {meta?.total} results
+        </p>
       </div>
       <div className="w-full  md:w-[calc(34%-75px)] gap-4 flex-center-between">
         <input
           type="text"
           className="border rounded-lg outline-none bg-transparent dark:border-dark px-3 py-[0.35rem] w-full"
-          placeholder="Enter Keywords.."
+          placeholder="Enter Keywords.. (not implemented)"
         />
       </div>
     </div>

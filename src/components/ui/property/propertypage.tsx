@@ -1,12 +1,10 @@
 "use client";
-
 import CTA from "@/components/shared/common/pagecomponent/cta";
 import Pagination from "@/components/shared/common/pagecomponent/pagination";
 import PropertyFullWidth from "@/components/shared/common/pagecomponent/propertyfullwidth";
 import PropertyList from "@/components/shared/common/pagecomponent/propertylist";
 import AdvancedSearch from "@/components/shared/common/propertyfilters/advancedsearch";
 import HeadeFilters from "@/components/shared/common/propertyfilters/headefilters";
-import PriceRange from "@/components/shared/common/propertyfilters/pricerange";
 import Type from "@/components/shared/common/propertyfilters/type";
 import { property } from "@/data/dummyData";
 import { TFlat, TResponse, TStats } from "@/interface";
@@ -19,9 +17,11 @@ import { useDispatch } from "react-redux";
 const PropertyPage = ({
   flat,
   stats,
+  radio,
 }: {
   flat: TResponse<TFlat[]>;
   stats: TResponse<TStats[]>;
+  radio?: string;
 }) => {
   const { isFilterMenuOpen } = useAppSelector((state) => state.ui);
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const PropertyPage = ({
 
   return (
     <div className="pt-20 px-[3%] md:px-[6%]">
-      <HeadeFilters layout={layout} setLayout={setLayout} />
+      <HeadeFilters layout={layout} setLayout={setLayout} meta={flat.meta} />
       <div className="grid md:grid-cols-4 gap-x-14 mt-5">
         <div className="md:col-span-3 mt-5 md:mt-0 h-fit md:sticky top-0 ">
           {layout === "grid" ? (
@@ -46,7 +46,7 @@ const PropertyPage = ({
           ) : (
             <PropertyFullWidth flat={flat?.data} />
           )}
-          <Pagination itemsPerPage={8} pageData={property} />
+          <Pagination itemsPerPage={flat.meta?.limit} pageData={flat?.data} />
         </div>
         <div className=" md:col-span-1 row-start-3 md:row-start-auto h-fit md:sticky top-0">
           <div
@@ -62,8 +62,7 @@ const PropertyPage = ({
                 <p className="uppercase">Filters</p>
               </div>
               <AdvancedSearch />
-              <Type stats={stats.data} />
-              <PriceRange />
+              <Type stats={stats.data} activeRadio={radio} />
               {/* <SocialIcons /> */}
               <CTA />
             </div>

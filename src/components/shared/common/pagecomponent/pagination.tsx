@@ -1,25 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { TFlat } from "@/interface";
 import { getCurrentItems } from "@/redux/features/dataslice";
 import { useEffect, useState } from "react";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
 
-const Pagination = ({ itemsPerPage, pageData }) => {
+const Pagination = ({
+  itemsPerPage = 8,
+  pageData,
+}: {
+  itemsPerPage: number | undefined;
+  pageData: TFlat[];
+}) => {
   const [offset, setOffset] = useState(0);
   const dispatch = useDispatch();
 
   const endOffset = offset + itemsPerPage;
-  const currentItems = pageData.slice(offset, endOffset);
-  const pageCount = Math.ceil(pageData.length / itemsPerPage);
+  const currentItems = pageData?.slice(offset, endOffset);
+  const pageCount = Math.ceil(pageData?.length / itemsPerPage);
 
   useEffect(() => {
     dispatch(getCurrentItems(currentItems));
   }, [currentItems]);
 
   const handlePageClick = (e) => {
-    const newOffset = (e.selected * itemsPerPage) % pageData.length;
+    const newOffset = (e.selected * itemsPerPage) % pageData?.length;
     setOffset(newOffset);
   };
 

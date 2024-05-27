@@ -9,9 +9,9 @@ import Projects from "@/components/shared/common/projects";
 import Testimonial from "@/components/shared/common/testimonial";
 import Brands from "@/components/shared/common/brands";
 import Feeds from "./utils/feeds";
-import { TFlatResponse } from "@/interface/tflat/tflat";
+import { TFlat, TResponse } from "@/interface";
 
-const HomeComp = ({ flat }: { flat: TFlatResponse }) => {
+const HomeComp = ({ flat }: { flat: TResponse<TFlat[]> }) => {
   return (
     <div className="pt-24 px-[3%] md:px-[6%]">
       <Hero />
