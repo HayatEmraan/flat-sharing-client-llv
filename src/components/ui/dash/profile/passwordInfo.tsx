@@ -1,9 +1,13 @@
+import { PasswordAction } from "@/actions/apassword/passwordaction";
+import { useRouter } from "next/navigation";
+import { Confirm } from "notiflix";
 import { useState } from "react";
 
-const PasswordInfo = () => {
+const PasswordInfo = ({ username }: { username: string }) => {
   const [passwordError, setPasswordError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const handlePassword = (event: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+  const handlePassword = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitting(true);
 
@@ -19,12 +23,40 @@ const PasswordInfo = () => {
     ).value;
 
     if (newPassword !== confirmPassword) {
-      setPasswordError(true);
+      setSubmitting(false);
+      return setPasswordError(true);
     }
     const payload = {
       oldPassword: currentPassword,
       newPassword: confirmPassword,
     };
+
+    const passInfo = await PasswordAction(payload);
+    console.log(passInfo);
+    if (passInfo?.success) {
+      Confirm.show(
+        "Success 🎉",
+        "your password has been successfully updated, please allow sometime to effect action.",
+        "{ Understood }",
+        "{ Love you ❤️ }",
+        () => {
+          router.refresh();
+        },
+        () => {
+          router.refresh();
+        }
+      );
+    } else {
+      Confirm.show(
+        "Oops, Something went wrong",
+        "Error while updating your password, please try again later!",
+        "{ Back }",
+        "Stay here",
+        () => {},
+        () => {}
+      );
+    }
+
     setSubmitting(false);
   };
 
@@ -44,6 +76,7 @@ const PasswordInfo = () => {
             <input
               type="text"
               name="username"
+              defaultValue={username}
               id="username"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="emily"
@@ -57,7 +90,7 @@ const PasswordInfo = () => {
               Current password
             </label>
             <input
-              type="text"
+              type="password"
               name="currentPassword"
               id="current-password"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -91,7 +124,7 @@ const PasswordInfo = () => {
               )}
             </label>
             <input
-              type="text"
+              type="password"
               name="confirmPassword"
               id="confirm-password"
               className={`shadow-sm ${

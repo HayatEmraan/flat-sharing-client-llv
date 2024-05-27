@@ -55,7 +55,7 @@ const Setting = ({ me }: { me: TResponse<TMe> }) => {
       {/* Right Content */}
       <div className="col-span-full xl:col-auto">
         <UploadImage photo={me?.data?.photo as string} />
-        <PasswordInfo />
+        <PasswordInfo username={me?.data?.username} />
       </div>
       <GeneralInfo me={me?.data} />
     </div>

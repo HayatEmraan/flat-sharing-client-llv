@@ -6,6 +6,7 @@ import Footer from "@/components/shared/footer/footer";
 import NewsLetter from "@/components/shared/newsletter/newsletter";
 import Navbar from "@/components/shared/common/navbar/navbar";
 import Dropdown from "@/components/shared/common/navbar/dropdown";
+import NProgress from "@/components/shared/progress/nprogress";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <NProgress />
         <GlobalProvider>
           {/* <Navbar />
           <Dropdown></Dropdown> */}
