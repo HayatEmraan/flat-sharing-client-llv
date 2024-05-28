@@ -1,9 +1,11 @@
+import { UserAction } from "@/actions/auser/useractions";
 import Users from "@/components/ui/dash/admin/users/Users";
 
-const Page = () => {
+const Page = async () => {
+  const users = await UserAction();
   return (
     <div>
-      <Users />
+      <Users users={users} />
     </div>
   );
 };

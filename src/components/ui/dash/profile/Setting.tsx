@@ -9,7 +9,7 @@ import { TResponse } from "@/interface";
 const Setting = ({ me }: { me: TResponse<TMe> }) => {
   return (
     <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
-      <div className="mb-4 col-span-full xl:mb-2">
+      <div className="my-2 col-span-full">
         <nav className="flex mb-5" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
             <li className="inline-flex items-center">
