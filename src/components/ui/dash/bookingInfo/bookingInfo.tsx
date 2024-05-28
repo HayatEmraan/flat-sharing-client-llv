@@ -4,12 +4,7 @@ import { TResponse } from "@/interface";
 import moment from "moment";
 import DataTable from "@/components/shared/dataTable/DataTable";
 import { IBooking } from "@/interface/ibooking/ibooking";
-import { Confirm, Report } from "notiflix";
-import { IoCheckmarkDone } from "react-icons/io5";
-import { RxCross2 } from "react-icons/rx";
 import { bookingStatus } from "@/constant/booking.status";
-import { changeBookingStatus } from "@/actions/abooking/bookingaction";
-import { useRouter } from "next/navigation";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 120 },
@@ -17,37 +12,37 @@ const columns: GridColDef[] = [
     field: "name",
     headerName: "Name",
     type: "string",
-    width: 160,
+    width: 170,
   },
   {
     field: "category",
     type: "string",
     headerName: "Category",
-    width: 150,
+    width: 160,
   },
   {
     field: "location",
     type: "string",
     headerName: "Location",
-    width: 150,
+    width: 160,
   },
   {
     field: "purpose",
     type: "string",
     headerName: "Purpose",
-    width: 130,
+    width: 150,
   },
   {
     field: "price",
     type: "string",
     headerName: "Price",
-    width: 100,
+    width: 150,
   },
   {
     field: "status",
     type: "string",
     headerName: "Status",
-    width: 140,
+    width: 150,
     renderCell: (params) => {
       return (
         <p
@@ -67,21 +62,17 @@ const columns: GridColDef[] = [
     field: "createdAt",
     headerName: "Created At",
     type: "string",
-    width: 140,
+    width: 150,
   },
   {
     field: "updatedAt",
     headerName: "Updated At",
     type: "string",
-    width: 140,
+    width: 150,
   },
 ];
 
-const ReserveProperties = ({
-  bookings,
-}: {
-  bookings: TResponse<IBooking[]>;
-}) => {
+const BookingInfo = ({ bookings }: { bookings: TResponse<IBooking[]> }) => {
   const props = bookings?.data?.map((booking) => ({
     id: "#" + booking?.id.slice(0, 8),
     name: booking?.flat?.name,
@@ -89,108 +80,10 @@ const ReserveProperties = ({
     category: booking?.flat?.category,
     location: booking?.flat?.location,
     status: booking.status,
-    slugId: booking?.id,
     price: "$" + booking?.flat?.price,
     createdAt: moment(booking?.createdAt)?.startOf("day")?.fromNow(),
     updatedAt: moment(booking?.updatedAt)?.startOf("day")?.fromNow(),
   }));
-
-  const router = useRouter();
-  const handleReject = async (id: string) => {
-    Confirm.show(
-      "Decline Confirmation ⚠️",
-      "Are you really want to decline?",
-      "{ Yes }",
-      "{ No }",
-      async () => {
-        const bookingInfo = await changeBookingStatus({
-          id,
-          status: bookingStatus.rejected,
-        });
-        if (bookingInfo?.success) {
-          Report.success(
-            "Successful ✔️",
-            '"Booking has been declined successfully, allow some time to take effect"',
-            "{ I understood }",
-            () => {
-              router.refresh();
-            }
-          );
-        } else {
-          Report.failure(
-            "UnSuccessful ❌",
-            '"Something went wrong, Booking has not decline successfully, Please try again"',
-            "{ I'll do }",
-            () => {}
-          );
-        }
-      },
-      () => {}
-    );
-  };
-
-  const handleApprove = (id: string) => {
-    Confirm.show(
-      "Approve Confirmation ⚠️",
-      "Are you really want to approve?",
-      "{ Yes }",
-      "{ No }",
-      async () => {
-        const bookingInfo = await changeBookingStatus({
-          id,
-          status: bookingStatus.confirmed,
-        });
-        if (bookingInfo?.success) {
-          Report.success(
-            "Successful ✔️",
-            '"Booking has been approved successfully, allow some time to take effect"',
-            "{ I understood }",
-            () => {
-              router.refresh();
-            }
-          );
-        } else {
-          Report.failure(
-            "UnSuccessful ❌",
-            '"Something went wrong, Booking has not approve successfully, Please try again"',
-            "{ I'll do }",
-            () => {}
-          );
-        }
-      },
-      () => {}
-    );
-  };
-
-  const actionColumn: GridColDef = {
-    field: "action",
-    headerName: "Action",
-    width: 200,
-    renderCell: (params) => {
-      return (
-        <div className="action">
-          {params.row.status === bookingStatus.pending ? (
-            <>
-              <div
-                className="cursor-pointer"
-                onClick={() => handleApprove(params.row.slugId)}>
-                <IoCheckmarkDone style={{ height: "22px", width: "20px" }} />
-              </div>
-              <div
-                className="cursor-pointer"
-                onClick={() => handleReject(params.row.slugId)}>
-                <RxCross2
-                  style={{ height: "22px", width: "20px", color: "red" }}
-                />
-              </div>
-            </>
-          ) : (
-            <span className="text-indigo-500">no action required</span>
-          )}
-        </div>
-      );
-    },
-  };
 
   return (
     <div className="users px-4">
@@ -237,9 +130,9 @@ const ReserveProperties = ({
           Booking
         </h1>
       </div>
-      <DataTable columns={[...columns, actionColumn]} rows={props} />
+      <DataTable columns={columns} rows={props} />
     </div>
   );
 };
 
-export default ReserveProperties;
+export default BookingInfo;

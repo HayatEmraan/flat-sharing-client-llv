@@ -3,9 +3,10 @@
 import { ENV } from "@/config";
 import { getCookie } from "../acookies/getcookie";
 
-type TDeleteUser = {
-  id?: string;
+type TChangeUser = {
+  id: string;
   isActive?: string;
+  role?: string;
 };
 
 export const UserAction = async () => {
@@ -22,7 +23,7 @@ export const UserAction = async () => {
   ).json();
 };
 
-export const DeleteUser = async (payload: TDeleteUser) => {
+export const ChangeUserPermission = async (payload: TChangeUser) => {
   return await (
     await fetch(ENV.backend_url + "/user/change-role", {
       method: "PATCH",

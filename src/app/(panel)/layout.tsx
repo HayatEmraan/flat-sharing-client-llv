@@ -1,10 +1,12 @@
+import { JWTAction } from "@/actions/ajwt/jwtaction";
 import Aside from "@/components/ui/dash/siderbar/aside";
 import React from "react";
 
-const PanelLayout = ({ children }: { children: React.ReactNode }) => {
+const PanelLayout = async ({ children }: { children: React.ReactNode }) => {
+  const user = await JWTAction();
   return (
     <>
-      <Aside>{children}</Aside>
+      <Aside user={user}>{children}</Aside>
     </>
   );
 };

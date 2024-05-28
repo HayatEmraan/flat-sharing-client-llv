@@ -1,6 +1,5 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import "./dataTable.scss";
-import Link from "next/link";
 
 type Props = {
   columns: GridColDef<object>[];
@@ -30,6 +29,8 @@ const DataTable = (props: Props) => {
         }}
         pageSizeOptions={[5]}
         density="standard"
+        disableRowSelectionOnClick
+        disableVirtualization
       />
     </div>
   );

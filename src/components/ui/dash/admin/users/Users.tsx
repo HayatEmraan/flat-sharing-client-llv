@@ -6,7 +6,11 @@ import { IUser, TResponse } from "@/interface";
 import moment from "moment";
 import { Confirm, Report } from "notiflix";
 import { useRouter } from "next/navigation";
-import { DeleteUser } from "@/actions/auser/useractions";
+import { ChangeUserPermission } from "@/actions/auser/useractions";
+import { UserStatus } from "@/constant/user.status";
+import { UserRole } from "@/constant/user.role";
+import { MdAdminPanelSettings } from "react-icons/md";
+import { FaUserShield } from "react-icons/fa";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 150 },
@@ -28,13 +32,13 @@ const columns: GridColDef[] = [
     field: "name",
     type: "string",
     headerName: "Name",
-    width: 150,
+    width: 145,
   },
   {
     field: "email",
     type: "string",
     headerName: "Email",
-    width: 200,
+    width: 170,
   },
   {
     field: "profession",
@@ -43,16 +47,34 @@ const columns: GridColDef[] = [
     width: 150,
   },
   {
+    field: "role",
+    type: "string",
+    headerName: "Role",
+    width: 100,
+    renderCell: (params) => {
+      return (
+        <p
+          className={`${
+            params.row.role === UserRole.admin
+              ? "text-white bg-green-400"
+              : "text-white bg-red-700"
+          } p-1 rounded-md`}>
+          {params.row.role}
+        </p>
+      );
+    },
+  },
+  {
     field: "createdAt",
     headerName: "Created At",
     type: "string",
-    width: 150,
+    width: 130,
   },
   {
     field: "updatedAt",
     headerName: "Updated At",
     type: "string",
-    width: 150,
+    width: 130,
   },
 ];
 
@@ -65,6 +87,7 @@ const Users = ({ users }: { users: TResponse<IUser[]> }) => {
     profession: user?.userprofile?.profession,
     name: user?.userprofile?.name,
     slugId: user?.id,
+    role: user?.role,
     id: "#" + user?.id?.slice(0, 8),
     createdAt: moment(user?.createdAt)?.startOf("day")?.fromNow(),
     updatedAt: moment(user?.userprofile?.updatedAt)?.startOf("day")?.fromNow(),
@@ -77,12 +100,11 @@ const Users = ({ users }: { users: TResponse<IUser[]> }) => {
       "{ Yes }",
       "{ No }",
       async () => {
-        const deleteInfo = await DeleteUser({
+        const updatedInfo = await ChangeUserPermission({
           id,
-          isActive: "deactivate",
+          isActive: UserStatus.deactivate,
         });
-        console.log(deleteInfo);
-        if (deleteInfo?.success) {
+        if (updatedInfo?.success) {
           Report.success(
             "Successful ✔️",
             '"User has been deleted successfully, allow some time to take effect"',
@@ -104,13 +126,60 @@ const Users = ({ users }: { users: TResponse<IUser[]> }) => {
     );
   };
 
+  const handleRole = (id: string, role: string) => {
+    const upperCaseRole = role?.toUpperCase();
+    Confirm.show(
+      "Permission Confirmation ⚠️",
+      `you really wanna make ${upperCaseRole} role?`,
+      "{ Yes }",
+      "{ No }",
+      async () => {
+        const updatedInfo = await ChangeUserPermission({
+          id,
+          role,
+        });
+        console.log(updatedInfo);
+        if (updatedInfo?.success) {
+          Report.success(
+            "Successful ✔️",
+            '"User role has been changed successfully, allow some time to take effect"',
+            "{ I understood }",
+            () => {
+              router.refresh();
+            }
+          );
+        } else {
+          Report.failure(
+            "UnSuccessful ❌",
+            '"Something went wrong, User role has not changed successfully, Please try again"',
+            "{ I'll do }",
+            () => {}
+          );
+        }
+      },
+      () => {}
+    );
+  };
+
   const actionColumn: GridColDef = {
     field: "action",
     headerName: "Action",
     width: 200,
     renderCell: (params) => {
+      const currentRole = params.row.role;
+      const role =
+        currentRole === UserRole.admin ? UserRole.user : UserRole.admin;
       return (
         <div className="action">
+          <div
+            className="cursor-pointer"
+            onClick={() => handleRole(params.row.slugId, role)}>
+            {currentRole === UserRole.admin ? (
+              <MdAdminPanelSettings style={{ height: "23px", width: "22px" }} />
+            ) : (
+              <FaUserShield style={{ height: "23px", width: "22px" }} />
+            )}
+          </div>
           <div
             className="delete"
             onClick={() => handleDelete(params.row.slugId)}>

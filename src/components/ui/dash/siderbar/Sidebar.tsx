@@ -1,15 +1,32 @@
 "use client";
 
 import { ChevronFirst, ChevronLast } from "lucide-react";
-// import profile from "../assets/profile.png";
-import { createContext, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { flatvue } from "@/assets";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const SidebarContext = createContext(null);
+type TContext = {
+  expanded: boolean;
+  path: string;
+};
 
-export default function Sidebar({ children }) {
+type TContextProps = TContext | undefined;
+
+type ISideBar = {
+  icon: ReactNode;
+  text: string;
+  active?: boolean;
+  alert?: boolean;
+  path: string;
+};
+
+const SidebarContext = createContext<TContextProps>(undefined);
+
+export default function Sidebar({ children }: { children: ReactNode }) {
   const [expanded, setExpanded] = useState(true);
+  const path = usePathname();
   return (
     <>
       <aside className="h-screen">
@@ -29,7 +46,7 @@ export default function Sidebar({ children }) {
             </button>
           </div>
 
-          <SidebarContext.Provider value={{ expanded }}>
+          <SidebarContext.Provider value={{ expanded, path }}>
             <ul className="flex-1 px-3">{children}</ul>
           </SidebarContext.Provider>
 
@@ -53,35 +70,40 @@ export default function Sidebar({ children }) {
   );
 }
 
-export function SidebarItem({ icon, text, active, alert }) {
-  const { expanded } = useContext(SidebarContext);
+export function SidebarItem({ icon, text, path }: ISideBar) {
+  const contextValue = useContext(SidebarContext);
+  const value = contextValue?.expanded;
+  const currentPath = contextValue?.path?.toLowerCase();
+  const comparePath = currentPath === path;
+
   return (
-    <li
+    <Link
+      href={path}
       className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
-        active
+        comparePath
           ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
           : "hover:bg-indigo-50 text-gray-600"
       }`}>
       {icon}
       <span
         className={`overflow-hidden transition-all ${
-          expanded ? "w-52 ml-3" : "w-0"
+          value ? "w-52 ml-3" : "w-0"
         }`}>
         {text}
       </span>
-      {alert && (
+      {comparePath && (
         <div
           className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
-            expanded ? "" : "top-2"
+            value ? "" : "top-2"
           }`}></div>
       )}
 
-      {!expanded && (
+      {!value && (
         <div
           className={`absolute left-full rounded-md px-2 py-1 ml-6 bg-indigo-100 text-indigo-800 text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}>
           {text}
         </div>
       )}
-    </li>
+    </Link>
   );
 }
