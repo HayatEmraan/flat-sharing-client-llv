@@ -1,5 +1,5 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
-import "./dataTable.scss";
+import "./dataTable.css";
 
 type Props = {
   columns: GridColDef<object>[];

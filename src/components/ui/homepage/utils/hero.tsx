@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Hero = () => {
   return (
     <div
@@ -43,7 +45,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="flex-1 basis-[20rem]">
-        <img src="/images/hero-4.png" alt="" className="w-full" />
+        <Image src="/images/hero-4.png" alt="" className="w-full" />
       </div>
     </div>
   );

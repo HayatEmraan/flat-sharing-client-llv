@@ -24,7 +24,8 @@ const SingleFeedCardGrid = ({
 }: ISingleFeedCard) => {
   return (
     <div key={id} className="m-4 cursor-pointer">
-      <img
+      <Image
+        alt=""
         src={image}
         className="w-full rounded-2xl
            object-cover h-[200px]"

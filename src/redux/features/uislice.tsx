@@ -9,13 +9,21 @@ const initialState = {
   isFilterMenuOpen: false,
 };
 
+const navLinksFind = (mainLink: string) => {
+  const nav = navLinks.find((link) => link.linkText === mainLink);
+  if (nav) {
+    return nav;
+  }
+  return {};
+};
+
 const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
     openDropdown: (state, action) => {
       const mainLink = action.payload.link;
-      state.currentLink = navLinks.find((link) => link.linkText === mainLink);
+      state.currentLink = navLinksFind(mainLink);
       state.isDropdownOpen = true;
       state.position = action.payload.center;
     },

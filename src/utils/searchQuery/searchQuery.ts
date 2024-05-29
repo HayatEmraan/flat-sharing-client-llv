@@ -1,4 +1,4 @@
-import { TSearchParams } from "@/interface/tsearch/tsearch";
+import { TSearchQuery } from "@/interface/tsearch/tsearch";
 
 export const searchQuery = [
   "price",
@@ -12,7 +12,7 @@ export const searchQuery = [
   "endPrice",
 ];
 
-export const queryBuilder = async (searchParams: TSearchParams) => {
+export const queryBuilder = async (searchParams: TSearchQuery) => {
   let query: string = "";
   Object.keys(searchParams).map((search) => {
     if (searchQuery.includes(search) && searchParams[search]) {

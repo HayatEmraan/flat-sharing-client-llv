@@ -1,6 +1,5 @@
 "use client";
 import { GridColDef } from "@mui/x-data-grid";
-import "./Users.scss";
 import DataTable from "../../../../shared/dataTable/DataTable";
 import { IUser, TResponse } from "@/interface";
 import moment from "moment";
@@ -11,6 +10,7 @@ import { UserStatus } from "@/constant/user.status";
 import { UserRole } from "@/constant/user.role";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { FaUserShield } from "react-icons/fa";
+import Image from "next/image";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 150 },
@@ -19,7 +19,7 @@ const columns: GridColDef[] = [
     headerName: "Photo",
 
     renderCell: (params) => {
-      return <img src={params.row.photo || "/noavatar.png"} alt="avatar" />;
+      return <Image src={params.row.photo || "/noavatar.png"} alt="avatar" />;
     },
   },
   {
@@ -183,7 +183,7 @@ const Users = ({ users }: { users: TResponse<IUser[]> }) => {
           <div
             className="delete"
             onClick={() => handleDelete(params.row.slugId)}>
-            <img src="/delete.svg" alt="" />
+            <Image src="/delete.svg" alt="" />
           </div>
         </div>
       );

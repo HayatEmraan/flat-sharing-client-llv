@@ -17,8 +17,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        poppins: "poppins",
-        questrial: "Questrial",
+        poppins: "Poppins, sans-serif",
+        questrial: "Questrial, sans-serif",
       },
       colors: {
         primary: "#FF6400",
@@ -40,16 +40,16 @@ const config: Config = {
     plugin(function ({ addUtilities }) {
       const newUtilities = {
         ".text-muted": {
-          opacity: 0.8,
+          opacity: "0.8",
         },
         ".transition-a": {
           transition: "all 0.3s ease-in-out",
         },
         ".card-shadow": {
-          boxShadow: " 0 0 0.8rem 0.25rem rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 0 0.8rem 0.25rem rgba(0, 0, 0, 0.1)",
         },
         ".shadow-light": {
-          boxShadow: "0.1rem 0.1rem 0.3rem .1rem rgba(0, 0, 0, 0.05)",
+          boxShadow: "0.1rem 0.1rem 0.3rem 0.1rem rgba(0, 0, 0, 0.05)",
         },
         ".border-light": {
           border: "1px solid rgba(46, 46, 46, 0.1)",

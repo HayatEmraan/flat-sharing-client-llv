@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { brands } from "../../../data/dummyData";
 
 const Brands = () => {
@@ -14,7 +15,7 @@ const Brands = () => {
       <div className="flex-wrap p-4 mt-8 flex-center-center gap-x-16 gap-y-5">
         {brands?.map((image, i) => (
           <div className="group" key={i}>
-            <img
+            <Image
               src={image}
               alt=""
               className="w-20 group-hover:scale-125 transition-a"

@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
     }
   }
   const verify = await JWTAction();
-
+  console.log(verify);
   if (pathname.startsWith("/dash/users")) {
     if (verify.role === UserRole.admin) {
       return NextResponse.next();

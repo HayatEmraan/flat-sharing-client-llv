@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FiCheck, FiLayers, FiUsers } from "react-icons/fi";
 
 const Speciality = () => {
@@ -43,7 +44,7 @@ const Speciality = () => {
         </div>
         <div className="flex-1 basis-[20rem]">
           <div className="relative">
-            <img
+            <Image
               src="/images/property (5).jpg"
               alt=""
               className="rounded-lg w-full sm:h-[400px] object-cover"

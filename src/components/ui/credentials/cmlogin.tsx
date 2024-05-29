@@ -1,5 +1,4 @@
 "use client";
-
 import { LoginAction } from "@/actions/alogin/loginaction";
 import FsForm from "@/components/shared/form/fsform";
 import { TLoginUser } from "@/interface";
@@ -27,10 +26,13 @@ const CmLogin = () => {
       );
     } else {
       setSubmitLoading(false);
-
       Report.failure(
         "{Sign In} Failure",
-        '"Failure is simply the opportunity to begin again, this time more intelligently." <br/><br/>- Henry Ford',
+        `${
+          login?.message
+            ? login?.message
+            : '"Failure is simply the opportunity to begin again, this time more intelligently." <br/><br/>- Henry Ford'
+        }`,
         "{ Try, again }",
         () => {}
       );

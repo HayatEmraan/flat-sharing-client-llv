@@ -57,7 +57,7 @@ const ImagesCom = ({ data }: { data: TFlat }) => {
             <div className="grid grid-cols-2 gap-2">
               {data?.images?.slice(1, 5).map((image, index) => (
                 <div key={index} className="overflow-hidden rounded-lg">
-                  <img
+                  <Image
                     src={image}
                     alt={`Image ${index + 1}`}
                     className="w-full h-full object-cover"

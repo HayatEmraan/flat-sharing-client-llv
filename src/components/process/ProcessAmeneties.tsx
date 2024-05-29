@@ -1,6 +1,7 @@
 import { AmenetiesType } from "@/data/Ameneties";
 import { placeAmenities } from "@/utils/zustand/types/ztypes";
 import { userAppStore } from "@/utils/zustand/zstore";
+import Image from "next/image";
 import React from "react";
 
 export default function ProcessAmeneties() {
@@ -55,7 +56,7 @@ export default function ProcessAmeneties() {
                         : addAmenity(facility);
                     }}>
                     {facility?.image && (
-                      <img
+                      <Image
                         src={facility?.image}
                         alt={facility?.name}
                         className="h-7"

@@ -3,6 +3,7 @@ import { BiBed, BiMap, BiMapAlt, BiTab } from "react-icons/bi";
 import CardHoverIcons from "../cardhovericons";
 import CardLabels from "../cardlabels";
 import { TFlat } from "@/interface/tflat/tflat";
+import Image from "next/image";
 
 const SingleProductCardFullWidth = (flatInfo: TFlat) => {
   return (
@@ -12,7 +13,7 @@ const SingleProductCardFullWidth = (flatInfo: TFlat) => {
           <Link
             href={`/property/details/${flatInfo?.id}`}
             className="!opacity-100">
-            <img
+            <Image
               src={flatInfo?.images[0]}
               alt={flatInfo?.name}
               className="object-cover w-full h-full group-hover:scale-125 transition-a"

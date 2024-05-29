@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Confirm, Report } from "notiflix";
 import { useRouter } from "next/navigation";
 import { deleteSingleFlat } from "@/actions/aflats/flatactions";
+import Image from "next/image";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 120 },
@@ -119,7 +120,7 @@ const Properties = ({ properties }: { properties: TResponse<IProperty[]> }) => {
       return (
         <div className="action">
           <div className="delete" onClick={() => handleEdit()}>
-            <img src="/view.svg" alt="" />
+            <Image src="/view.svg" alt="" />
           </div>
           <Link href={`/property/details/${params.row.slugId}`}>
             <FaEye style={{ height: "22px", width: "20px" }} />
@@ -127,7 +128,7 @@ const Properties = ({ properties }: { properties: TResponse<IProperty[]> }) => {
           <div
             className="delete"
             onClick={() => handleDelete(params.row.slugId)}>
-            <img src="/delete.svg" alt="" />
+            <Image src="/delete.svg" alt="" />
           </div>
         </div>
       );

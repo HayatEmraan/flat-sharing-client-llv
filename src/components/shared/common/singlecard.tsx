@@ -3,6 +3,7 @@ import Link from "next/link";
 import CardHoverIcons from "./cardhovericons";
 import CardLabels from "./cardlabels";
 import { TFlat } from "@/interface/tflat/tflat";
+import Image from "next/image";
 
 const SingleProductCard = (flatInfo: TFlat) => {
   return (
@@ -13,7 +14,7 @@ const SingleProductCard = (flatInfo: TFlat) => {
         <Link
           href={`/property/details/${flatInfo?.id}`}
           className="!opacity-100">
-          <img
+          <Image
             src={flatInfo?.images[0]}
             alt={flatInfo?.name}
             className="w-full  h-fit md:h-[250px] object-cover group-hover:scale-125 transition-a"

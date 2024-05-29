@@ -25,7 +25,7 @@ const Pagination = ({
     dispatch(getCurrentItems(currentItems));
   }, [currentItems]);
 
-  const handlePageClick = (e) => {
+  const handlePageClick = (e: { selected: number; }) => {
     const newOffset = (e.selected * itemsPerPage) % pageData?.length;
     setOffset(newOffset);
   };
