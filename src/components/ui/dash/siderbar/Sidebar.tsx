@@ -22,7 +22,7 @@ type ISideBar = {
   path: string;
 };
 
-const SidebarContext = createContext<TContextProps>(undefined);
+export const SidebarContext = createContext<TContextProps>(undefined);
 
 export default function Sidebar({ children }: { children: ReactNode }) {
   const [expanded, setExpanded] = useState(true);

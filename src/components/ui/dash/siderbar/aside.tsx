@@ -11,6 +11,8 @@ import {
 import Sidebar, { SidebarItem } from "./Sidebar";
 import { IUserInfo } from "@/interface";
 import { JwtPayload } from "jwt-decode";
+import { UserRole } from "@/constant/user.role";
+import Logout from "./logout";
 
 const adminSideBarItems = [
   {
@@ -39,8 +41,33 @@ const adminSideBarItems = [
     path: "/dash/reserve",
   },
 ];
+
+const userSideBarItems = [
+  {
+    text: "Home",
+    icon: <Home size={20} />,
+    path: "/",
+  },
+  {
+    text: "My Bookings",
+    icon: <StickyNote size={20} />,
+    path: "/dash/bookings",
+  },
+  {
+    text: "My Properties",
+    icon: <Calendar size={20} />,
+    path: "/dash/properties",
+  },
+  {
+    text: "Booking (Reserve)",
+    icon: <Layers size={20} />,
+    path: "/dash/reserve",
+  },
+];
+
 const sideBarItems = {
   admin: adminSideBarItems,
+  user: userSideBarItems,
 };
 
 const Aside = ({
@@ -48,23 +75,17 @@ const Aside = ({
   user,
 }: {
   children: React.ReactNode;
-  user: JwtPayload;
+  user: IUserInfo;
 }) => {
+  const admin = sideBarItems.admin;
+  const userGlobe = sideBarItems.user;
+  const sideBar = user.role === UserRole.admin ? admin : userGlobe;
+
   return (
     <>
       <div className="flex gap-12">
         <Sidebar>
-          {/* <SidebarItem icon={<Home size={20} />} text="Home" alert path="/" />
-          <SidebarItem
-            icon={<LayoutDashboard size={20} />}
-            text="Users"
-            active
-          />
-          <SidebarItem icon={<StickyNote size={20} />} text="Bookings" alert />
-          <SidebarItem icon={<Calendar size={20} />} text="Properties" />
-          <SidebarItem icon={<Layers size={20} />} text="Booking (Reserve)" /> */}
-
-          {sideBarItems?.admin?.map((sideItem) => {
+          {sideBar?.map((sideItem) => {
             return (
               <SidebarItem
                 key={sideItem.text}
@@ -74,14 +95,20 @@ const Aside = ({
               />
             );
           })}
-
           <hr className="my-3" />
+          {user.role === UserRole.user && (
+            <SidebarItem
+              icon={<Settings size={20} />}
+              text="Listing (Property)"
+              path="/listing"
+            />
+          )}
           <SidebarItem
             icon={<Settings size={20} />}
             text="Settings"
             path="/dash/settings"
           />
-          {/* <SidebarItem icon={<LifeBuoy size={20} />} text="Logout" /> */}
+          <Logout />
         </Sidebar>
         {children}
       </div>

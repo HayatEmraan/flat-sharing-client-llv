@@ -30,13 +30,13 @@ export const navLinks = [
     subLinks: [
       {
         id: 1,
-        linkText: "Portiflio-1",
-        url: "/portifolio",
+        linkText: "Sign In",
+        url: "/auth/login",
       },
       {
         id: 2,
-        linkText: "Portiflio-2",
-        url: "/portifolio-2",
+        linkText: "Sign Up",
+        url: "/auth/register",
       },
     ],
   },

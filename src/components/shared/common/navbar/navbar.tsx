@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SingleLink from "./singlelink";
 import ProfileIndicator from "./profile/profileindicator";
+import Image from "next/image";
+import { flatvue } from "@/assets";
 
 const Navbar = () => {
   const { isSidebarOpen } = useAppSelector((state) => state.ui);
@@ -47,8 +49,9 @@ const Navbar = () => {
       className="navbar h-[60px] fixed w-full z-20 top-0 left-0 px-[2%]  md:px-[6%] flex-center-between py-[0.35rem] bg-white/60 border-b backdrop-blur-sm dark:border-dark dark:bg-card-dark/60"
       onMouseOver={handleClose}>
       <Link href="/" className="flex-shrink-0 flex-align-center gap-x-1">
-        <BiBuildingHouse className="text-3xl text-primary" />
-        <h1 className="hidden md:block">MartVilla</h1>
+        {/* <BiBuildingHouse className="text-3xl text-primary" />
+        <h1 className="hidden md:block">MartVilla</h1> */}
+        <Image width={170} src={flatvue.logo} alt="logo" />
       </Link>
 
       <div className="flex-align-center gap-x-4">
