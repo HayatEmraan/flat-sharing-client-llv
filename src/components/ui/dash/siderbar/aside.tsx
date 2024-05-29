@@ -77,9 +77,9 @@ const Aside = ({
   children: React.ReactNode;
   user: IUserInfo;
 }) => {
-  const admin = sideBarItems.admin;
-  const userGlobe = sideBarItems.user;
-  const sideBar = user.role === UserRole.admin ? admin : userGlobe;
+  const admin = sideBarItems?.admin;
+  const userGlobe = sideBarItems?.user;
+  const sideBar = user?.role === UserRole?.admin ? admin : userGlobe;
 
   return (
     <>
@@ -96,7 +96,7 @@ const Aside = ({
             );
           })}
           <hr className="my-3" />
-          {user.role === UserRole.user && (
+          {user?.role === UserRole?.user && (
             <SidebarItem
               icon={<Settings size={20} />}
               text="Listing (Property)"

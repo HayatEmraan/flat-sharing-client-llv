@@ -11,8 +11,8 @@ const Testimonial = () => {
         </h1>
       </div>
       <div className="flex flex-wrap gap-4 mt-8">
-        {testimonials.map((testimonial) => (
-          <TestimonialCard {...testimonial} key={testimonial.id} />
+        {testimonials?.map((testimonial) => (
+          <TestimonialCard {...testimonial} key={testimonial?.id} />
         ))}
       </div>
     </div>

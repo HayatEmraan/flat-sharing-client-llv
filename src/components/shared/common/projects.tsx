@@ -9,7 +9,7 @@ const Projects = () => {
         <h1 className="heading">excellent projects both small and complex</h1>
       </div>
       <div className="grid grid-cols-1 gap-4 mt-8 sm:grid-cols-2 md:grid-cols-3">
-        {projects.map(({ id, name, number, image }) => (
+        {projects?.map(({ id, name, number, image }) => (
           <div key={id} className="relative w-full group">
             <div className="overflow-hidden">
               <Link href={"/"} className="!opacity-100">

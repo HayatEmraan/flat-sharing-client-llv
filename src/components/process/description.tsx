@@ -15,8 +15,8 @@ export default function Description() {
             className="border border-gray-400 h-56 w-[550px] rounded-lg active:border-gray-950 p-6 no-scrollbar text-lg "
             value={description}
             onChange={(e) => {
-              if (e.target.value.length <= 500) {
-                setDescription(e.target.value);
+              if (e?.target?.value?.length <= 500) {
+                setDescription(e?.target?.value);
               }
             }}
           />

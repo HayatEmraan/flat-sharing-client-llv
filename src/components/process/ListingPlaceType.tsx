@@ -25,18 +25,18 @@ const ListingPlaceType = () => {
         Which of these best describes your place?
       </h2>
       <ul className="flex flex-col gap-5 w-[800px]">
-        {data.map((place) => (
+        {data?.map((place) => (
           <li
-            key={place.title}
+            key={place?.title}
             className={`flex border border-gray-300 p-7 justify-between rounded-lg hover:border-gray-500 cursor-pointer ${
-              place.title === placeType?.title && "border-gray-950 bg-slate-100"
+              place?.title === placeType?.title && "border-gray-950 bg-slate-100"
             }`}
             onClick={() => setPlaceType(place)}>
             <div>
-              <h4 className="font-semibold">For {place.title}</h4>
-              <p>{place.subTitle}</p>
+              <h4 className="font-semibold">For {place?.title}</h4>
+              <p>{place?.subTitle}</p>
             </div>
-            {place.svg}
+            {place?.svg}
           </li>
         ))}
       </ul>

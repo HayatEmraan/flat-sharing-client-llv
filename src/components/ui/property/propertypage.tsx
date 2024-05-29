@@ -27,8 +27,8 @@ const PropertyPage = ({
   const dispatch = useDispatch();
   const handleCloseFilterMenu = (e: React.MouseEvent<HTMLDivElement>) => {
     if (
-      e.target instanceof HTMLElement &&
-      e.target.classList.contains("filter-modal")
+      e?.target instanceof HTMLElement &&
+      e?.target?.classList?.contains("filter-modal")
     ) {
       dispatch(closeFilterMenu());
     }
@@ -38,7 +38,7 @@ const PropertyPage = ({
 
   return (
     <div className="pt-20 px-[3%] md:px-[6%]">
-      <HeadeFilters layout={layout} setLayout={setLayout} meta={flat.meta} />
+      <HeadeFilters layout={layout} setLayout={setLayout} meta={flat?.meta} />
       <div className="grid md:grid-cols-4 gap-x-14 mt-5">
         <div className="md:col-span-3 mt-5 md:mt-0 h-fit md:sticky top-0 ">
           {layout === "grid" ? (
@@ -46,7 +46,7 @@ const PropertyPage = ({
           ) : (
             <PropertyFullWidth flat={flat?.data} />
           )}
-          <Pagination itemsPerPage={flat.meta?.limit} pageData={flat?.data} />
+          <Pagination itemsPerPage={flat?.meta?.limit} pageData={flat?.data} />
         </div>
         <div className=" md:col-span-1 row-start-3 md:row-start-auto h-fit md:sticky top-0">
           <div
@@ -62,7 +62,7 @@ const PropertyPage = ({
                 <p className="uppercase">Filters</p>
               </div>
               <AdvancedSearch />
-              <Type stats={stats.data} activeRadio={radio} />
+              <Type stats={stats?.data} activeRadio={radio} />
               {/* <SocialIcons /> */}
               <CTA />
             </div>

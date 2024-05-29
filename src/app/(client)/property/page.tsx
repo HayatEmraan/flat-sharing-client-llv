@@ -6,7 +6,7 @@ const Page = async () => {
   const flatStats = await getFlatStats();
 
   return (
-    <div>
+    <div className="mt-12">
       <PropertyPage flat={response} stats={flatStats} />
     </div>
   );

@@ -28,15 +28,15 @@ const Navbar = () => {
   const router = useRouter();
 
   const handleClose = (e: React.MouseEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    if (!target.classList.contains("link")) {
+    const target = e?.target as HTMLElement;
+    if (!target?.classList?.contains("link")) {
       dispatch(closeDropdown());
     }
   };
 
   const handleCloseSidebar = (e: React.MouseEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    if (target.classList.contains("mobile-modal")) dispatch(closeSidebar());
+    const target = e?.target as HTMLElement;
+    if (target?.classList?.contains("mobile-modal")) dispatch(closeSidebar());
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,7 +51,7 @@ const Navbar = () => {
       <Link href="/" className="flex-shrink-0 flex-align-center gap-x-1">
         {/* <BiBuildingHouse className="text-3xl text-primary" />
         <h1 className="hidden md:block">MartVilla</h1> */}
-        <Image width={170} src={flatvue.logo} alt="logo" />
+        <Image width={170} src={flatvue?.logo} alt="logo" />
       </Link>
 
       <div className="flex-align-center gap-x-4">
@@ -61,7 +61,7 @@ const Navbar = () => {
             showSearchBar && "!hidden"
           }`}>
           {navLinks.map(
-            (link) => !link.expand && <SingleLink {...link} key={link.id} />
+            (link) => !link.expand && <SingleLink {...link} key={link?.id} />
           )}
         </ul>
 
@@ -129,7 +129,7 @@ const Navbar = () => {
                 }`}
                 placeholder="search..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => setSearchTerm(e?.target?.value)}
               />
               <span
                 className={`grid flex-shrink-0 rounded-full w-9 h-9 place-items-center text-white bg-primary sm:cursor-pointer ${

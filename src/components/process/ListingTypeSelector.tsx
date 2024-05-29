@@ -11,7 +11,7 @@ const ListingTypeSelector = () => {
           Which of these best describes your place ?
         </h2>
         <div className="grid grid-cols-3 gap-5 my-10 pb-5 max-h-[70vh] overflow-auto scroll no-scrollbar">
-          {listingTypes.map((type) => (
+          {listingTypes?.map((type) => (
             <button
               onClick={() => setLocationType(type)}
               key={type?.name}

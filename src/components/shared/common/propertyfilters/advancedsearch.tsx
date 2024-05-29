@@ -10,7 +10,7 @@ const AdvancedSearch = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const formValues = Object.fromEntries(formData.entries());
+    const formValues = Object?.fromEntries(formData?.entries());
     let query: string = await queryBuilder(formValues);
     await routeRedirect("/property/query", query);
   };
@@ -28,9 +28,9 @@ const AdvancedSearch = () => {
             <option value="" selected disabled>
               Categories
             </option>
-            {listingTypes.map((type) => (
-              <option key={type.name} value={type.name}>
-                {type.name}
+            {listingTypes?.map((type) => (
+              <option key={type?.name} value={type?.name}>
+                {type?.name}
               </option>
             ))}
           </select>
@@ -44,9 +44,9 @@ const AdvancedSearch = () => {
             <option value="" selected disabled>
               Price Range
             </option>
-            {PriceRange.map((type) => (
-              <option key={type.name} value={type.value}>
-                {type.name}
+            {PriceRange?.map((type) => (
+              <option key={type?.name} value={type?.value}>
+                {type?.name}
               </option>
             ))}
           </select>

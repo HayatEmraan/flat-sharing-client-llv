@@ -29,7 +29,7 @@ export default function FloorPlan() {
         </p>
       </div>
       <div className="flex  flex-col w-[40%] gap-5">
-        {Object.keys(placeSpace).map((place) => (
+        {Object?.keys(placeSpace)?.map((place) => (
           <div
             className="flex justify-between w-full text-lg items-center"
             key={place}>

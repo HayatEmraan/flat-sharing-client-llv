@@ -39,7 +39,7 @@ const Invest = () => {
               </div>
             </div>
             <h1 className="mt-2 text-secondary dark:text-slate-300">
-              People Successfull Getting Homes
+              People Successful Getting Homes
             </h1>
           </div>
           <div>

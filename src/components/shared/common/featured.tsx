@@ -10,8 +10,8 @@ const Featured = ({ flat }: { flat: TFlat[] }) => {
         <h1 className="heading">explore featured latest properties</h1>
       </div>
       <div className="flex flex-wrap gap-4 mt-8">
-        {flat.slice(0, 3).map((featured: TFlat) => (
-          <SingleProductCard key={featured.id} {...featured} />
+        {flat?.slice(0, 3).map((featured: TFlat) => (
+          <SingleProductCard key={featured?.id} {...featured} />
         ))}
       </div>
     </div>

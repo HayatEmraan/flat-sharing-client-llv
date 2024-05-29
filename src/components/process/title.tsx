@@ -19,12 +19,12 @@ export default function Title() {
           className="border border-gray-400 h-40 w-[550px] rounded-lg active:border-gray-950 p-6 no-scrollbar text-4xl"
           value={title}
           onChange={(e) => {
-            if (e.target.value.length <= 24) {
-              setTitle(e.target.value);
+            if (e?.target?.value?.length <= 24) {
+              setTitle(e?.target?.value);
             }
           }}
         />
-        <span>{title.length}/24</span>
+        <span>{title?.length}/24</span>
       </div>
     </div>
   );

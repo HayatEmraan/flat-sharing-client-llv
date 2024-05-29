@@ -10,7 +10,7 @@ const SingleProductCardFullWidth = (flatInfo: TFlat) => {
       <div className="sm:col-span-1">
         <div className="group !opacity-100 overflow-hidden relative h-full">
           <Link
-            href={`/property/details/${flatInfo.id}`}
+            href={`/property/details/${flatInfo?.id}`}
             className="!opacity-100">
             <img
               src={flatInfo?.images[0]}
@@ -30,7 +30,7 @@ const SingleProductCardFullWidth = (flatInfo: TFlat) => {
       <div className="sm:col-span-2 md:col-span-3">
         <div className="p-3">
           <Link
-            href={`/property/details/${flatInfo.id}`}
+            href={`/property/details/${flatInfo?.id}`}
             className="group-hover:text-primary transition-a">
             <h1 className="text-lg font-bold capitalize">{flatInfo?.name}</h1>
           </Link>
@@ -69,7 +69,7 @@ const SingleProductCardFullWidth = (flatInfo: TFlat) => {
               ${flatInfo?.price}
             </h1>
             <Link
-              href={`/property/details/${flatInfo.id}`}
+              href={`/property/details/${flatInfo?.id}`}
               className="btn btn-secondary">
               details
             </Link>

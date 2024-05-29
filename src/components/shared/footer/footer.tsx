@@ -3,7 +3,6 @@
 import { flatvue } from "@/assets";
 import Image from "next/image";
 import Link from "next/link";
-import { BiBuildingHouse } from "react-icons/bi";
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FiFacebook } from "react-icons/fi";
 
@@ -14,7 +13,7 @@ const Footer = () => {
         <div className="flex flex-wrap gap-2">
           <div className="flex-1 basis-[10rem]">
             <Link href="/" className="flex-shrink-0 flex-align-center gap-x-1">
-              <Image src={flatvue.logoWhite} alt="logo" />
+              <Image src={flatvue?.logoWhite} alt="logo" />
             </Link>
             <div className="mt-3">
               <p className="text-sm">
@@ -95,7 +94,7 @@ const Footer = () => {
                 <a href="#">Terms & Conditions</a>
               </li>
               <li className="my-3 text-muted">
-                <a href="#">Pricacy Policy</a>
+                <a href="#">Privacy Policy</a>
               </li>
             </ul>
           </div>

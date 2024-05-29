@@ -30,7 +30,7 @@ export default function Photos() {
       </CldUploadButton>
 
       <div className="grid grid-cols-3 gap-4 h-[55vh] overflow-auto pb-10 no-scrollbar">
-        {photos.map((photo) => (
+        {photos?.map((photo) => (
           <div className="relative h-36 w-[200px]" key={photo}>
             <Image src={photo} fill alt="upload" />
           </div>

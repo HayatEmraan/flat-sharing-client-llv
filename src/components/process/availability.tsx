@@ -33,7 +33,7 @@ export default function Availability() {
         </p>
       </div>
       <ul className="flex  flex-col w-[40%] gap-5">
-        {Object.keys(searchPlaceSpace).map((place) => (
+        {Object?.keys(searchPlaceSpace)?.map((place) => (
           <li
             className="flex justify-between w-full text-lg items-center"
             key={place}>

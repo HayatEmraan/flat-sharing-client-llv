@@ -35,7 +35,7 @@ const SingleFeedCardGrid = ({
       <div className="flex items-center mt-5">
         <Image
           alt="logo"
-          src={flatvue.logo}
+          src={flatvue?.logo}
           className="w-[35px] rounded-full"
         />
         <div className="ml-2">

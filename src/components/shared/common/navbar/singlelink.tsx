@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 const SingleLink = ({ id, linkText, url, subLinks }: NavLink) => {
   const dispatch = useDispatch();
   const handleDropDown = (e: React.MouseEvent<HTMLElement>) => {
-    const target = e.currentTarget as HTMLElement;
-    const linkCords = target.getBoundingClientRect();
-    const center = (linkCords.left + linkCords.right) / 2;
+    const target = e?.currentTarget as HTMLElement;
+    const linkCords = target?.getBoundingClientRect();
+    const center = (linkCords?.left + linkCords?.right) / 2;
     dispatch(openDropdown({ link: linkText, center }));
   };
 

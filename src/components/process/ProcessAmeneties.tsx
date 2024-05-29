@@ -31,7 +31,7 @@ export default function ProcessAmeneties() {
         </h2>
         <p>Your most popular amenities, etc.</p>
         <div className="flex flex-col gap-5 max-h-[65vh] overflow-auto scroll no-scrollbar">
-          {AmenetiesType.map(({ type, data }) => (
+          {AmenetiesType?.map(({ type, data }) => (
             <div key={type} className="flex flex-col gap-5">
               {type === "advanced" && (
                 <span className="text-lg font-medium">
@@ -39,7 +39,7 @@ export default function ProcessAmeneties() {
                 </span>
               )}
               <div className="grid grid-cols-3 gap-5">
-                {data.map((facility, index) => (
+                {data?.map((facility, index) => (
                   <button
                     key={index}
                     className={` flex flex-col justify-start font-semibold border border-gray-300 rounded-md p-3 hover:border-gray-950 transition-all duration-300 ${

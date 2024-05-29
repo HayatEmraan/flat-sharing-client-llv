@@ -12,8 +12,8 @@ const Feeds = () => {
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
     mt-10  md:px-15 lg:px-32">
         {" "}
-        {feeds.slice(0, 3).map((feed) => (
-          <SingleFeedCardGrid key={feed.id} {...feed} />
+        {feeds?.slice(0, 3).map((feed) => (
+          <SingleFeedCardGrid key={feed?.id} {...feed} />
         ))}
       </div>
     </div>

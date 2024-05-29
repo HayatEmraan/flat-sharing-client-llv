@@ -5,7 +5,7 @@ const PropertyFullWidth = ({ flat }: { flat: TFlat[] }) => {
   return (
     <div>
       {flat?.map((property) => (
-        <SingleProductCardFullWidth key={property.id} {...property} />
+        <SingleProductCardFullWidth key={property?.id} {...property} />
       ))}
     </div>
   );

@@ -18,8 +18,8 @@ export default function Price() {
             className="border border-gray-400 h-20 w-[550px] rounded-lg active:border-gray-950 p-6 no-scrollbar text-3xl items-center flex justify-center pl-7"
             value={price}
             onChange={(e) => {
-              if (e.target.value) {
-                setPrice(parseInt(e.target.value));
+              if (e?.target?.value) {
+                setPrice(parseInt(e?.target?.value));
               } else setPrice(0);
             }}
           />
@@ -37,8 +37,8 @@ export default function Price() {
             className="border border-gray-400 h-20 w-[550px] rounded-lg active:border-gray-950 p-6 no-scrollbar text-3xl items-center flex justify-center pl-7"
             value={taxes}
             onChange={(e) => {
-              if (e.target.value) {
-                setTaxes(parseInt(e.target.value));
+              if (e?.target?.value) {
+                setTaxes(parseInt(e?.target?.value));
               } else setTaxes(0);
             }}
           />

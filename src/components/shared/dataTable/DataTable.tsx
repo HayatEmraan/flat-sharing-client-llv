@@ -11,8 +11,8 @@ const DataTable = (props: Props) => {
     <div className="dataTable !max-h-[88vh] w-[75vw]">
       <DataGrid
         className="dataGrid"
-        rows={props.rows}
-        columns={props.columns}
+        rows={props?.rows}
+        columns={props?.columns}
         initialState={{
           pagination: {
             paginationModel: {

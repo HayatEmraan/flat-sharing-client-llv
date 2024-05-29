@@ -12,7 +12,7 @@ const Brands = () => {
         </p>
       </div>
       <div className="flex-wrap p-4 mt-8 flex-center-center gap-x-16 gap-y-5">
-        {brands.map((image, i) => (
+        {brands?.map((image, i) => (
           <div className="group" key={i}>
             <img
               src={image}

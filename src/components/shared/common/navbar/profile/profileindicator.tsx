@@ -9,13 +9,12 @@ import { useDispatch } from "react-redux";
 import Avatar from "./avatar";
 
 const ProfileIndicator = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const linkText = "Profile";
   const dispatch = useDispatch();
   const handleDropDown = (e: React.MouseEvent<HTMLElement>) => {
-    const target = e.currentTarget as HTMLElement;
-    const linkCords = target.getBoundingClientRect();
-    const center = (linkCords.left + linkCords.right) / 2;
+    const target = e?.currentTarget as HTMLElement;
+    const linkCords = target?.getBoundingClientRect();
+    const center = (linkCords?.left + linkCords?.right) / 2;
     dispatch(openDropdown({ link: linkText, center }));
   };
   return (

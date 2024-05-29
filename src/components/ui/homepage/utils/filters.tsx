@@ -61,7 +61,7 @@ const Filters = () => {
                 id=""
                 onChange={() => setOnChange(true)}
                 className="w-full bg-transparent border-0 outline-none dark:bg-hover-color-dark opacity-70">
-                {PriceRange.map((type) => (
+                {PriceRange?.map((type) => (
                   <option key={type.name} value={type.value}>
                     {type.name}
                   </option>

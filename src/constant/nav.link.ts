@@ -1,3 +1,9 @@
+export type TNavAuth = {
+  id: number;
+  linkText: string;
+  url: string;
+};
+
 const NavForAdmin = [
   {
     id: 1,
@@ -49,7 +55,10 @@ const NavForUser = [
   },
 ];
 
-export const NavForAuth = {
+export const NavForAuth: {
+  admin: TNavAuth[];
+  user: TNavAuth[];
+} = {
   admin: NavForAdmin,
   user: NavForUser,
 };

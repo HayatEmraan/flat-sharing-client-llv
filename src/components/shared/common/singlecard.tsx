@@ -11,7 +11,7 @@ const SingleProductCard = (flatInfo: TFlat) => {
       shadow-light dark:border-card-dark border rounded-lg overflow-hidden relative group`}>
       <div className="group !opacity-100 overflow-hidden relative">
         <Link
-          href={`/property/details/${flatInfo.id}`}
+          href={`/property/details/${flatInfo?.id}`}
           className="!opacity-100">
           <img
             src={flatInfo?.images[0]}
@@ -60,7 +60,7 @@ const SingleProductCard = (flatInfo: TFlat) => {
             ${flatInfo?.price}
           </h1>
           <a
-            href={`/property/details/${flatInfo.id}`}
+            href={`/property/details/${flatInfo?.id}`}
             className="btn btn-secondary">
             details
           </a>

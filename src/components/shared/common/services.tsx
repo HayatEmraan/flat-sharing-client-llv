@@ -10,7 +10,7 @@ const Services = () => {
         </h1>
       </div>
       <div className="grid grid-cols-1 gap-4 mt-5 sm:grid-cols-2 md:grid-cols-3">
-        {services.map(({ id, name, icon, text }) => (
+        {services?.map(({ id, name, icon, text }) => (
           <div
             className="p-3 text-center rounded-lg hover:card-shadow hover:border-t-4 hover:border-t-primary dark:hover:bg-card-dark"
             key={id}>

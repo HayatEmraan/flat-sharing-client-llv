@@ -7,17 +7,17 @@ const DetailsFacilities = ({ data }: { data: TFlat }) => {
   return (
     <div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-        {data.amenities.map((singleAmenity, index) => {
+        {data?.amenities?.map((singleAmenity, index) => {
           return (
             <div className="" key={index}>
               <h2 className="font-bold flex items-center">
                 <Image
                   src={singleAmenity?.image}
                   width={20}
-                  alt={singleAmenity.name}
+                  alt={singleAmenity?.name}
                   height={20}
                   className="mr-2"></Image>
-                {singleAmenity.name}
+                {singleAmenity?.name}
               </h2>
               <ul>
                 {singleAmenity?.facilities?.map((facility, index) => (

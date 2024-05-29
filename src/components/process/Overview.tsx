@@ -35,7 +35,7 @@ const Overview = () => {
       </div>
 
       <ul className="flex flex-col  md:gap-10 2xl:gap-16">
-        {data.map(({ title, description, image }, index) => (
+        {data?.map(({ title, description, image }, index) => (
           <li key={title} className="flex items-center justify-start gap-6">
             <strong className="text-2xl pt-5 text-dwelling-light-black">
               <h3>{index + 1}</h3>
