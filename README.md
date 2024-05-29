@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Flat Share
 
-## Getting Started
+Welcome to the backend repository for HealthCare, a project developed as part of the "Level 2 Web Development Course" offered by Programming Hero. This repository contains the backend codebase responsible for handling server-side logic, database management, and communication between different system components.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Flat Share Backend](#healthcare-server)
+  - [Features](#features)
+  - [Technologies Used](#technologies-used)
+  - [Installation and Setup](#installation-and-setup)
+- [Flat Share Frontend](#healthcare-server)
+  - [Technologies Used](#technologies-used)
+  - [Features](#features)
+  - [Installation and Setup](#installation-and-setup)
+  - [Account Creation](#table-of-contents)
+    - [Sign Up](#table-of-contents)
+    - [Sign In](#table-of-contents)
+  - [Home page](#table-of-contents)
+    - [Explore](#table-of-contents)
+    - [Search by need](#table-of-contents)
+  - [Property Page](#table-of-contents)
+    - [Explore](#table-of-contents)
+    - [Details](#table-of-contents)
+  - [Sign In as Admin](#table-of-contents)
+    - [Home](#table-of-contents)
+    - [Users](#table-of-contents)
+    - [Bookings](#table-of-contents)
+    - [Properties](#table-of-contents)
+    - [Bookings (Reserve)](#table-of-contents)
+  - [Sign In as User](#table-of-contents)
+    - [Home](#table-of-contents)
+    - [My Bookings](#table-of-contents)
+    - [My Properties](#table-of-contents)
+    - [Bookings (Reserve)](#table-of-contents)
+    - [Listing](#table-of-contents)
+  - [Shared with User](#table-of-contents)
+    - [Settings](#table-of-contents)
+    - [Logout](#table-of-contents)
+  - [Restriction](#table-of-contents)
+    - [For Admin](#table-of-contents)
+      - [Listing](#table-of-contents)
+      - [Reserve](#table-of-contents)
+    - [For User](#table-of-contents)
+      - [Users](#table-of-contents)
+- [Deployment](#healthcare-server)
+  - [Frontend](#features)
+  - [Backend](#technologies-used)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **User Authentication and Authorization**: Secure authentication using JWT tokens.
+- **User Management**: CRUD operations for managing user accounts.
+- **Booking Management**: Create, update, and delete appointments.
+- **Prescription Management**: Create, update, and delete prescriptions.
+- **Email Notifications**: Send email notifications for verify email, account create confirmation, and booking reserve & update so on.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Used
 
-## Learn More
+- **Node.js**: Runtime environment for executing JavaScript code.
+- **Express.js**: Web application framework for building APIs and handling HTTP requests.
+- **Prisma**: ORM (Object-Relational Mapping) tool for database management.
+- **PostgreSQL**: Relational database management system.
+- **JWT**: JSON Web Tokens for secure authentication and authorization.
+- **bcrypt**: Library for hashing passwords.
+- **nodemailer**: Library for sending email notifications.
 
-To learn more about Next.js, take a look at the following resources:
+## Installation and Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone this repository: `git clone https://github.com/HayatEmraan/flat-sharing-server-llv`
+2. Install dependencies: `npm install`
+3. Set up the environment variables by creating a `.env` file and filling in the required variables based on the provided `.env.example` file.
+4. Run the database migrations: `npx prisma migrate dev`
+5. Start the server: `npm run dev`
