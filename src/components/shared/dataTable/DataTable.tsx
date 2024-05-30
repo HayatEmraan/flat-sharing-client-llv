@@ -27,6 +27,7 @@ const DataTable = (props: Props) => {
             quickFilterProps: { debounceMs: 500 },
           },
         }}
+        loading={!props?.columns}
         pageSizeOptions={[5]}
         density="standard"
         disableRowSelectionOnClick

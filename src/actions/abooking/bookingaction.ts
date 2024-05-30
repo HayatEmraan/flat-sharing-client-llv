@@ -51,3 +51,17 @@ export const changeBookingStatus = async (payload: TBookingStatus) => {
     })
   ).json();
 };
+
+export const BookingByAction = async () => {
+  return await (
+    await fetch(ENV.backend_url + "/booking/booking-sync-info", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: await getCookie(),
+      },
+      cache: "no-store",
+    })
+  ).json();
+};
