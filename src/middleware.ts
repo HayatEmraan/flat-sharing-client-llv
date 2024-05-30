@@ -29,7 +29,6 @@ export async function middleware(request: NextRequest) {
     }
   }
   const verify = await JWTAction();
-  console.log(verify);
   if (pathname.startsWith("/dash/users")) {
     if (verify.role === UserRole.admin) {
       return NextResponse.next();
@@ -39,6 +38,14 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname.startsWith("/listing")) {
+    if (verify.role === UserRole.user) {
+      return NextResponse.next();
+    } else {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
+  if (pathname.startsWith("/agreement")) {
     if (verify.role === UserRole.user) {
       return NextResponse.next();
     } else {
@@ -56,5 +63,10 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dash/:path*", "/listing/:path*", "/auth/:path*"],
+  matcher: [
+    "/dash/:path*",
+    "/listing/:path*",
+    "/auth/:path*",
+    "/agreement/:path*",
+  ],
 };

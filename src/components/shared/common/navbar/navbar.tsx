@@ -17,8 +17,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SingleLink from "./singlelink";
 import ProfileIndicator from "./profile/profileindicator";
-import Image from "next/image";
+
 import { flatvue } from "@/assets";
+import Image from "next/image";
 
 const Navbar = () => {
   const { isSidebarOpen } = useAppSelector((state) => state.ui);

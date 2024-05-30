@@ -1,11 +1,10 @@
-import Image from "next/image";
 import { FiArrowRight } from "react-icons/fi";
 
 const NewsLetter = () => {
   return (
     <div className="flex flex-wrap -mt-24 bg-primary h-fit sm:h-[250px] rounded-xl py-4 text-slate-100">
       <div className="flex-1 basis-[20rem]">
-        <Image
+        <img
           src="/images/3d-house.png"
           alt=""
           className="w-[400px] lg:w-[500px] -mt-14"

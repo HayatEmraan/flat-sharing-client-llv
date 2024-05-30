@@ -3,9 +3,11 @@
 import { ChevronFirst, ChevronLast } from "lucide-react";
 import { createContext, ReactNode, useContext, useState } from "react";
 import { flatvue } from "@/assets";
-import Image from "next/image";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { TMe } from "@/interface/tme/tme";
 
 type TContext = {
   expanded: boolean;
@@ -24,7 +26,13 @@ type ISideBar = {
 
 export const SidebarContext = createContext<TContextProps>(undefined);
 
-export default function Sidebar({ children }: { children: ReactNode }) {
+export default function Sidebar({
+  children,
+  me,
+}: {
+  children: ReactNode;
+  me: TMe;
+}) {
   const [expanded, setExpanded] = useState(true);
   const path = usePathname();
   return (
@@ -51,16 +59,13 @@ export default function Sidebar({ children }: { children: ReactNode }) {
           </SidebarContext.Provider>
 
           <div className="border-t flex p-3">
-            {/* <img src={profile} className="w-10 h-10 rounded-md" /> */}
             <div
               className={`flex justify-between items-center overflow-hidden transition-all ${
                 expanded ? "w-52 ml-3" : "w-0"
               } `}>
               <div className="leading-4">
-                <h4 className="font-semibold">constGenius</h4>
-                <span className="text-xs text-gray-600">
-                  constgenius@gmail.com
-                </span>
+                <h4 className="font-semibold">{me?.name}</h4>
+                <span className="text-xs text-gray-600">{me?.email}</span>
               </div>
             </div>
           </div>

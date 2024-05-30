@@ -1,6 +1,7 @@
 import { flatvue } from "@/assets";
 import CmLogin from "@/components/ui/credentials/cmlogin";
 import Image from "next/image";
+
 import Link from "next/link";
 
 const LoginPage = () => {
@@ -10,7 +11,7 @@ const LoginPage = () => {
         <div className="form-container sign-in">
           <div className="form-div">
             <Link href={"/"}>
-              <Image src={flatvue.logo} alt="Logo" />
+              <Image width={250} src={flatvue.logo} alt="Logo" />
             </Link>
             <span>use your email / username password</span>
             <CmLogin />

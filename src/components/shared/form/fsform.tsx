@@ -1,5 +1,3 @@
-
-
 import React from "react";
 
 import {
@@ -34,7 +32,9 @@ const FsForm = ({ onSubmit, children, defaultValues, resolver }: TfsForm) => {
   };
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(submit)}>{children}</form>
+      <form className="w-full" onSubmit={methods.handleSubmit(submit)}>
+        {children}
+      </form>
     </FormProvider>
   );
 };

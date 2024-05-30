@@ -2,6 +2,7 @@
 
 import { flatvue } from "@/assets";
 import Image from "next/image";
+
 import Link from "next/link";
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FiFacebook } from "react-icons/fi";

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const Hero = () => {
   return (
     <div
@@ -8,8 +6,7 @@ const Hero = () => {
         background: "url('/images/hero-bg-pattern.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
-      }}
-    >
+      }}>
       <div className="absolute top-0 right-0 rounded-full bg-[#04a7ff]/30 dark:bg-[#04a7ff]/50 w-72 h-72 -z-10 blur-[120px]"></div>
       <div className="flex-1 basis-[20rem]">
         <h1 className="text-4xl font-bold capitalize md:text-5xl">
@@ -45,7 +42,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="flex-1 basis-[20rem]">
-        <Image src="/images/hero-4.png" alt="" className="w-full" />
+        <img src="/images/hero-4.png" alt="" className="w-full" />
       </div>
     </div>
   );

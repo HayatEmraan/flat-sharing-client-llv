@@ -4,8 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import Image from "next/image";
+
 import { TFlat } from "@/interface";
+import Image from "next/image";
 
 const ImagesCom = ({ data }: { data: TFlat }) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -14,7 +15,7 @@ const ImagesCom = ({ data }: { data: TFlat }) => {
       setIsMobile(window?.innerWidth <= 767);
     };
 
-    handleResize(); // Initial check
+    handleResize();
     window?.addEventListener("resize", handleResize);
 
     return () => {
@@ -57,7 +58,7 @@ const ImagesCom = ({ data }: { data: TFlat }) => {
             <div className="grid grid-cols-2 gap-2">
               {data?.images?.slice(1, 5).map((image, index) => (
                 <div key={index} className="overflow-hidden rounded-lg">
-                  <Image
+                  <img
                     src={image}
                     alt={`Image ${index + 1}`}
                     className="w-full h-full object-cover"

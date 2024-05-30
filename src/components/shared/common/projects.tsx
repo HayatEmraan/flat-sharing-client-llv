@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { projects } from "../../../data/dummyData";
-import Image from "next/image";
 
 const Projects = () => {
   return (
@@ -14,7 +13,7 @@ const Projects = () => {
           <div key={id} className="relative w-full group">
             <div className="overflow-hidden">
               <Link href={"/"} className="!opacity-100">
-                <Image
+                <img
                   src={image}
                   alt={name}
                   className="w-full  h-fit md:h-[250px] object-cover group-hover:scale-125 transition-a"

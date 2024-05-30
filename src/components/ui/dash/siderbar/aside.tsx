@@ -3,16 +3,14 @@ import {
   Home,
   StickyNote,
   Layers,
-  Flag,
   Calendar,
-  LifeBuoy,
   Settings,
 } from "lucide-react";
 import Sidebar, { SidebarItem } from "./Sidebar";
-import { IUserInfo } from "@/interface";
-import { JwtPayload } from "jwt-decode";
+import { IUserInfo, TResponse } from "@/interface";
 import { UserRole } from "@/constant/user.role";
 import Logout from "./logout";
+import { TMe } from "@/interface/tme/tme";
 
 const adminSideBarItems = [
   {
@@ -73,9 +71,11 @@ const sideBarItems = {
 const Aside = ({
   children,
   user,
+  me
 }: {
   children: React.ReactNode;
-  user: IUserInfo;
+    user: IUserInfo;
+  me: TResponse<TMe>
 }) => {
   const admin = sideBarItems?.admin;
   const userGlobe = sideBarItems?.user;
@@ -84,7 +84,7 @@ const Aside = ({
   return (
     <>
       <div className="flex gap-12">
-        <Sidebar>
+        <Sidebar me={me.data}>
           {sideBar?.map((sideItem) => {
             return (
               <SidebarItem

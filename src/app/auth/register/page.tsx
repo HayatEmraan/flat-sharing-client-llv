@@ -1,6 +1,7 @@
 import { flatvue } from "@/assets";
 import CmRegister from "@/components/ui/credentials/cmregister";
 import Image from "next/image";
+
 import Link from "next/link";
 
 const RegisterPage = async () => {
@@ -10,9 +11,9 @@ const RegisterPage = async () => {
         <div className="form-container sign-up">
           <div className="form-div">
             <Link href={"/"}>
-              <Image src={flatvue.logo} alt="Logo" />
+              <Image width={250} src={flatvue.logo} alt="Logo" />
             </Link>
-            <span>use your email for registeration</span>
+            <span>use your email for registration</span>
             <CmRegister />
           </div>
         </div>

@@ -79,7 +79,7 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
 
   const checkingUserName = async (str: string) => {
     setUsernameError(`available checking...`);
-    if (str.length === 0) {
+    if (str?.length === 0) {
       setError(true);
       return setUsernameError("No spaces allowed");
     }
@@ -88,9 +88,9 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
 
     if (usernameExistOrNot?.statusCode === 200) {
       setError(false);
-      setUsernameError(`congrats, available`);
+      setUsernameError("");
     } else {
-      setUsernameError(`oops! not available`);
+      setUsernameError(`oops! username not available`);
       setError(true);
     }
   };
@@ -98,7 +98,7 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
   const checkingMail = async (str: string) => {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (str.length === 0) {
+    if (str?.length === 0) {
       return setMailError("");
     }
     if (!emailPattern.test(str)) {
@@ -115,7 +115,7 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
     } else if (!mailExistOrNot?.success) {
       setError(true);
       setIsValidMail(false);
-      setMailError(`oops! already exist`);
+      setMailError(`oops! mail already exist`);
     }
   };
 
@@ -127,7 +127,7 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
   };
 
   const onChangeConfirmPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    const cPassword = e.target.value;
+    const cPassword = e.target?.value;
     if (cPassword && password) {
       if (cPassword === password) {
         setError(false);
@@ -140,10 +140,10 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
   };
 
   const onChangeCode = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length === 0) {
+    if (e.target?.value?.length === 0) {
       return setMailCodeCheck(true);
     }
-    if (Number(e.target.value) === mailCode) {
+    if (Number(e.target?.value) === mailCode) {
       setMailCodeCheck(true);
     } else {
       setMailCodeCheck(false);
@@ -168,55 +168,55 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
 
   return (
     <>
-      <div className="tooltip">
+      <div>
         <input
           type="text"
           {...register("username")}
           placeholder="Username"
           required
           pattern="^\S*$"
+          className={usernameError && "!ring-2 ring-red-700"}
           onKeyDown={(event) => noSpaces(event)}
-          onChange={(e) => onChangeUsername(e)}
+          onBlur={(e) => onChangeUsername(e)}
         />
-        <span className="tooltip-text">
-          {usernameError ? usernameError : "No spaces allowed"}
+        <span className="text-sm text-red-700">
+          {usernameError && usernameError}
         </span>
       </div>
 
-      <div className={`tooltip ${mailSend && "!hidden"}`}>
+      <div className={`relative ${mailSend && "!hidden"}`}>
         <input
           type="email"
           {...register("email")}
           onKeyDown={(event) => noSpaces(event)}
           placeholder="Email"
+          className={mailError && "!ring-2 ring-red-700"}
           required
-          onChange={(e) => onChangeMail(e)}
+          onBlur={(e) => onChangeMail(e)}
         />
-        {mailError && <span className="tooltip-text">{mailError}</span>}
+        <span className="text-sm text-red-700">{mailError && mailError}</span>
         {isValidMail && (
           <span
             onClick={() => {
               setMailSend(true);
               sendMailCode();
             }}
-            className="absolute right-2 top-1/4 translate-y-0.5 text-slate-500 hover:text-slate-700 cursor-pointer">
+            className="absolute right-1 top-1/4 -translate-y-0.5 text-white hover:text-slate-900 cursor-pointer border bg-purple-400 p-1 rounded-lg">
             send code
           </span>
         )}
       </div>
-      <div className={`tooltip ${!mailSend && "!hidden"}`}>
+      <div className={`${!mailSend && "!hidden"}`}>
         <input
           type="text"
           {...register("code")}
           placeholder="Enter Code"
           required
           pattern="^\S*$"
+          className={!mailCodeCheck ? "!ring-2 ring-red-700" : ""}
           onKeyDown={(event) => noSpaces(event)}
           onChange={(e) => onChangeCode(e)}
         />
-        {!mailCodeCheck && (
-          <span className="tooltip-text">code isn&apos;t valid</span>
-        )}
       </div>
       <input
         type="password"
@@ -226,7 +226,7 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
         required
       />
 
-      <div className="tooltip">
+      <div>
         <input
           type="password"
           {...register("cPassword")}
@@ -237,9 +237,6 @@ const CmRegisterValues = ({ loading }: { loading: boolean }) => {
           disabled={!password}
           onChange={(e) => onChangeConfirmPassword(e)}
         />
-        {mailError && <span className="tooltip-text">{mailError}</span>}
-        {!password && <span className="tooltip-text">type, password 1st</span>}
-        {matchPassword && <span className="tooltip-text">{matchPassword}</span>}
       </div>
       <button
         disabled={loading || error || !password}

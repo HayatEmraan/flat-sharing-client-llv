@@ -1,6 +1,7 @@
 "use server";
 import { ENV } from "@/config";
 import { getCookie } from "../acookies/getcookie";
+import { TResponse } from "@/interface";
 
 type TProfile = {
   name?: string;
@@ -9,6 +10,18 @@ type TProfile = {
   bio?: string;
   email?: string;
   photo?: string;
+};
+
+type TUserProfile = {
+  id: string;
+  userId: string;
+  bio?: string | null;
+  name?: string | null;
+  profession?: string | null;
+  address?: string | null;
+  photo?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export const ProfileAction = async (payload: TProfile) => {
@@ -38,4 +51,30 @@ export const getMe = async () => {
       credentials: "include",
     })
   ).json();
+};
+
+export const getMyProfile = async () => {
+  const result = (await (
+    await fetch(ENV.backend_url + "/user/get-my-profile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: await getCookie(),
+      },
+      cache: "no-store",
+      credentials: "include",
+    })
+  ).json()) as TResponse<TUserProfile>;
+
+  const middle = result?.data;
+  const name = middle?.name;
+  const profession = middle?.profession;
+  const address = middle?.address;
+  const conditions = name && profession && address;
+
+  if (conditions) {
+    return true;
+  } else {
+    return false;
+  }
 };

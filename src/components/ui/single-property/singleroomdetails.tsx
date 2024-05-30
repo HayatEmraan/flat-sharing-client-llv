@@ -23,7 +23,7 @@ const SingleRoomDetails = ({ data }: { data: TFlat }) => {
           <p>{data?.briefDescription}</p>
         </div>
       </div>
-      <ReserveNow amount={data?.price} />
+      <ReserveNow amount={data?.price} id={data?.id} />
     </div>
   );
 };

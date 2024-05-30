@@ -19,7 +19,7 @@ const columns: GridColDef[] = [
     headerName: "Photo",
 
     renderCell: (params) => {
-      return <Image src={params.row.photo || "/noavatar.png"} alt="avatar" />;
+      return <img src={params.row.photo || "/noavatar.png"} alt="avatar" />;
     },
   },
   {
@@ -175,15 +175,15 @@ const Users = ({ users }: { users: TResponse<IUser[]> }) => {
             className="cursor-pointer"
             onClick={() => handleRole(params.row.slugId, role)}>
             {currentRole === UserRole.admin ? (
-              <MdAdminPanelSettings style={{ height: "23px", width: "22px" }} />
+              <MdAdminPanelSettings style={{ height: "22px", width: "21px" }} />
             ) : (
-              <FaUserShield style={{ height: "23px", width: "22px" }} />
+              <FaUserShield style={{ height: "22px", width: "21px" }} />
             )}
           </div>
           <div
             className="delete"
             onClick={() => handleDelete(params.row.slugId)}>
-            <Image src="/delete.svg" alt="" />
+            <Image src="/delete.svg" alt="" width={25} height={25} />
           </div>
         </div>
       );

@@ -13,6 +13,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import { useDispatch } from "react-redux";
+import Notfound from "./notfound";
 
 const PropertyPage = ({
   flat,
@@ -40,14 +41,21 @@ const PropertyPage = ({
     <div className="pt-20 px-[3%] md:px-[6%]">
       <HeadeFilters layout={layout} setLayout={setLayout} meta={flat?.meta} />
       <div className="grid md:grid-cols-4 gap-x-14 mt-5">
-        <div className="md:col-span-3 mt-5 md:mt-0 h-fit md:sticky top-0 ">
-          {layout === "grid" ? (
-            <PropertyList flat={flat?.data} />
-          ) : (
-            <PropertyFullWidth flat={flat?.data} />
-          )}
-          <Pagination itemsPerPage={flat?.meta?.limit} pageData={flat?.data} />
-        </div>
+        {flat?.data?.length === 0 ? (
+          <Notfound />
+        ) : (
+          <div className="md:col-span-3 mt-5 md:mt-0 h-fit md:sticky top-0 ">
+            {layout === "grid" ? (
+              <PropertyList flat={flat?.data} />
+            ) : (
+              <PropertyFullWidth flat={flat?.data} />
+            )}
+            <Pagination
+              itemsPerPage={flat?.meta?.limit}
+              pageData={flat?.data}
+            />
+          </div>
+        )}
         <div className=" md:col-span-1 row-start-3 md:row-start-auto h-fit md:sticky top-0">
           <div
             className={`filter-modal ${isFilterMenuOpen && "open"}`}

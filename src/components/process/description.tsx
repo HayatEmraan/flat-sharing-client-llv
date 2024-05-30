@@ -20,7 +20,7 @@ export default function Description() {
               }
             }}
           />
-          <span>{description.length}/500</span>
+          <span>{description?.length}/500</span>
         </div>
       </div>
     </div>

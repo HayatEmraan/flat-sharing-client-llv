@@ -120,7 +120,7 @@ const Properties = ({ properties }: { properties: TResponse<IProperty[]> }) => {
       return (
         <div className="action">
           <div className="delete" onClick={() => handleEdit()}>
-            <Image src="/view.svg" alt="" />
+            <Image src="/view.svg" alt="" width={22} height={20} />
           </div>
           <Link href={`/property/details/${params.row.slugId}`}>
             <FaEye style={{ height: "22px", width: "20px" }} />
@@ -128,7 +128,7 @@ const Properties = ({ properties }: { properties: TResponse<IProperty[]> }) => {
           <div
             className="delete"
             onClick={() => handleDelete(params.row.slugId)}>
-            <Image src="/delete.svg" alt="" />
+            <Image src="/delete.svg" alt="" width={22} height={20} />
           </div>
         </div>
       );

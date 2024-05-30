@@ -44,11 +44,9 @@ const Speciality = () => {
         </div>
         <div className="flex-1 basis-[20rem]">
           <div className="relative">
-            <Image
-              src="/images/property (5).jpg"
-              alt=""
-              className="rounded-lg w-full sm:h-[400px] object-cover"
-            />
+            <div className="rounded-lg w-full sm:h-[400px] object-cover">
+              <Image src="/images/property (5).jpg" alt="" fill />
+            </div>
             <div className="absolute -bottom-10 sm:bottom-5 -left-2 md:-left-20">
               <div className="p-3 bg-white rounded-lg shadow-md w-72 flex-center-between gap-x-3 dark:bg-dark-light">
                 <h1>We have been serving our customers for over 70 years</h1>

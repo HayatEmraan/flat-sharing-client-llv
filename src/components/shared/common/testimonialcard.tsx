@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { FaQuoteRight } from "react-icons/fa";
 import { Rating } from "react-simple-star-rating";
 
@@ -17,18 +16,11 @@ const TestimonialCard = ({ reviewText, name, image, role }: ITestimonial) => {
       </div>
       <p>{reviewText}</p>
       <div className="mt-3 flex gap-x-3">
-        <Image src={image} alt={name} className="w-10 h-10 rounded-full" />
+        <img src={image} alt={name} className="w-10 h-10 rounded-full" />
         <div>
           <h1 className="font-semibold capitalize">{name}</h1>
           <p className="text-sm capitalize">{role}</p>
           <div className="mt-3">
-            {/* <ReactStars
-              size={18}
-              isHalf={true}
-              activeColor="#ffd700"
-              value={4.5}
-              edit={false}
-            /> */}
             <Rating
               initialValue={1}
               fillColor="#ffd700"
