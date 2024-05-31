@@ -1,17 +1,24 @@
 "use client";
 
-import { openDropdown } from "@/redux/features/uislice";
+import { closeDropdown, openDropdown } from "@/redux/features/uislice";
 import React from "react";
 import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import Avatar from "./avatar";
+import { useAppSelector } from "@/redux/hooks";
 
 const ProfileIndicator = () => {
   const linkText = "Profile";
   const dispatch = useDispatch();
+
+  const { isDropdownOpen } = useAppSelector((state) => state.ui);
+
   const handleDropDown = (e: React.MouseEvent<HTMLElement>) => {
+    if (isDropdownOpen) {
+      return dispatch(closeDropdown());
+    }
     const target = e?.currentTarget as HTMLElement;
     const linkCords = target?.getBoundingClientRect();
     const center = (linkCords?.left + linkCords?.right) / 2;

@@ -29,12 +29,12 @@ export const navLinks = [
     expand: true,
     subLinks: [
       {
-        id: 1,
+        id: 9,
         linkText: "Sign In",
         url: "/auth/login",
       },
       {
-        id: 2,
+        id: 10,
         linkText: "Sign Up",
         url: "/auth/register",
       },

@@ -3,7 +3,6 @@ import BookingInfo from "@/components/ui/dash/bookingInfo/bookingInfo";
 
 const Page = async () => {
   const response = await BookingByAction();
-  console.log(response);
   return (
     <div>
       <BookingInfo bookings={response} />

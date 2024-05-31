@@ -6,27 +6,27 @@ export type TNavAuth = {
 
 const NavForAdmin = [
   {
-    id: 1,
+    id: 11,
     linkText: "Users",
     url: "/dash/users",
   },
   {
-    id: 2,
+    id: 12,
     linkText: "Bookings",
     url: "/dash/bookings",
   },
   {
-    id: 3,
+    id: 13,
     linkText: "Properties",
     url: "/dash/properties",
   },
   {
-    id: 4,
+    id: 14,
     linkText: "Booking (Reserve)",
     url: "/dash/reserve",
   },
   {
-    id: 5,
+    id: 15,
     linkText: "Settings (Profile)",
     url: "/dash/settings",
   },
@@ -34,22 +34,22 @@ const NavForAdmin = [
 
 const NavForUser = [
   {
-    id: 1,
+    id: 16,
     linkText: "My Bookings",
     url: "/dash/bookings",
   },
   {
-    id: 2,
+    id: 17,
     linkText: "My Properties",
     url: "/dash/properties",
   },
   {
-    id: 3,
+    id: 18,
     linkText: "Booking (Reserve)",
     url: "/dash/reserve",
   },
   {
-    id: 3,
+    id: 19,
     linkText: "Settings (Profile)",
     url: "/dash/settings",
   },

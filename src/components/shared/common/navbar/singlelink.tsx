@@ -1,5 +1,5 @@
 import { NavLink } from "@/interface";
-import { openDropdown } from "@/redux/features/uislice";
+import { closeDropdown, openDropdown } from "@/redux/features/uislice";
 import Link from "next/link";
 import { BiChevronDown } from "react-icons/bi";
 import { useDispatch } from "react-redux";
@@ -7,10 +7,7 @@ import { useDispatch } from "react-redux";
 const SingleLink = ({ id, linkText, url, subLinks }: NavLink) => {
   const dispatch = useDispatch();
   const handleDropDown = (e: React.MouseEvent<HTMLElement>) => {
-    const target = e?.currentTarget as HTMLElement;
-    const linkCords = target?.getBoundingClientRect();
-    const center = (linkCords?.left + linkCords?.right) / 2;
-    dispatch(openDropdown({ link: linkText, center }));
+    dispatch(closeDropdown());
   };
 
   return (

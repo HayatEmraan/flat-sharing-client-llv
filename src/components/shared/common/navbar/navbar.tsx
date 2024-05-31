@@ -28,13 +28,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const handleClose = (e: React.MouseEvent<HTMLElement>) => {
-    const target = e?.target as HTMLElement;
-    if (!target?.classList?.contains("link")) {
-      dispatch(closeDropdown());
-    }
-  };
-
   const handleCloseSidebar = (e: React.MouseEvent<HTMLElement>) => {
     const target = e?.target as HTMLElement;
     if (target?.classList?.contains("mobile-modal")) dispatch(closeSidebar());
@@ -46,9 +39,7 @@ const Navbar = () => {
   };
 
   return (
-    <div
-      className="navbar h-[60px] fixed w-full z-20 top-0 left-0 px-[2%]  md:px-[6%] flex-center-between py-[0.35rem] bg-white/60 border-b backdrop-blur-sm dark:border-dark dark:bg-card-dark/60"
-      onMouseOver={handleClose}>
+    <div className="navbar h-[60px] fixed w-full z-20 top-0 left-0 px-[2%]  md:px-[6%] flex-center-between py-[0.35rem] bg-white/60 border-b backdrop-blur-sm dark:border-dark dark:bg-card-dark/60">
       <Link href="/" className="flex-shrink-0 flex-align-center gap-x-1">
         {/* <BiBuildingHouse className="text-3xl text-primary" />
         <h1 className="hidden md:block">MartVilla</h1> */}
